@@ -13,4 +13,20 @@ Classification
 Absences salariés
 Bulletin de paie
 Historique
+Etablissement
+Ventilation analytique
 
+Fichiers HRU necessaire 
+
+CCNEMPLOYEUR
+EMAIL
+EMPLOYEUR
+ENFANTS
+ENTETEPAIE
+ETABLISSEMENT
+EVENEMENTS
+GENCONTRAT
+IMPUTATIONANALYTIQUE
+INDIVIDU
+PERMSEJOUR
+VALIDCONTRAT
