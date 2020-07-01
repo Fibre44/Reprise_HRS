@@ -3205,7 +3205,7 @@ WHILE @VAR_SALARIE_LIGNE_EN_COURS<=@VAR_VALIDCONTRAT_TOTAL_LIGNES--Boucle dans V
 
 	Print 'Traitement du contrat '+CAST(@VAR_SALARIE_LIGNE_EN_COURS AS varchar(255))+'/'+CAST(@VAR_VALIDCONTRAT_TOTAL_LIGNES AS varchar(255))
 
-	SELECT @VAR_PREMIERE_LIGNE_SALARIE=MIN(VALIDCONTRAT_LIGNE) FROM VALIDCONTRAT WHERE MATRI=@VAR_MATRICULE_HRU;--récupération du numéro la première ligne du salarié dans la table
+	SELECT @VAR_PREMIERE_LIGNE_SALARIE=MIN(VALIDCONTRAT_LIGNE) FROM VALIDCONTRAT WHERE MATRI=@VAR_MATRICULE_HRU;--récupération du numéro de la première ligne du salarié dans la table
 	
 	--Initialisation des premieres valeurs 
 
@@ -3246,18 +3246,18 @@ WHILE @VAR_SALARIE_LIGNE_EN_COURS<=@VAR_VALIDCONTRAT_TOTAL_LIGNES--Boucle dans V
 
 		SELECT @VAR_PHD_DATEAPPLIC=CAST(DVCTR AS datetime) FROM VALIDCONTRAT  WHERE VALIDCONTRAT_LIGNE=@VAR_SALARIE_LIGNE_EN_COURS;--récupération de la date du changement
 
-		Print 'Initialisation du premiere salarie de base'+CAST(@VAR_VALEUR_MSM_ORIGINE AS varchar(255))+' avec la date '+CAST(@VAR_PHD_DATEAPPLIC AS varchar(255))
+		Print 'Initialisation du premier salarie de base'+CAST(@VAR_VALEUR_MSM_ORIGINE AS varchar(255))+' avec la date '+CAST(@VAR_PHD_DATEAPPLIC AS varchar(255))
 
 
 		INSERT INTO HR_SPRINT_PGHISTODETAIL
 		VALUES (@VAR_PHD_SIREN,@VAR_PHD_SALARIE,@VAR_PHD_ETABLISSEMENT,@VAR_PHD_PGINFOSMODIF,@VAR_PHD_PGTYPEHISTO,@VAR_PHD_NEWVALEUR_SALAIREMOIS1,@VAR_PHD_TYPEVALEUR,@VAR_PHD_TABLETTE,@VAR_PHD_PGTYPEINFOLS,@VAR_PHD_DATEAPPLIC,
 		@VAR_PHD_TRAITEMENTOK,@VAR_PHD_CODTABL,@VAR_PHD_CODEPOP,@VAR_PHD_POPULATION);
 
-		END
+		END --fin de test de la première ligne
 
-		--Pour les contrats suivants comparatif entre la valeur M et la valeur M+1 et ajout de la valeur M+1 si différent
+	--Pour les contrats suivants comparatif entre la valeur M et la valeur M+1 et ajout de la valeur M+1 si différent
 
-	SET @VAR_SALARIE_LIGNE_SUIVANTE=@VAR_SALARIE_LIGNE_EN_COURS+1;--numéro de la ligne suivante
+	SET @VAR_SALARIE_LIGNE_SUIVANTE=@VAR_SALARIE_LIGNE_EN_COURS+1;--numéro de la ligne suivante pour récupérer la valeur +1 pour la comparaison
 
 	IF @VAR_SALARIE_LIGNE_SUIVANTE>@VAR_VALIDCONTRAT_TOTAL_LIGNES--controle que la ligne suivante ne dépasse pas la dernière ligne du salarié
 
