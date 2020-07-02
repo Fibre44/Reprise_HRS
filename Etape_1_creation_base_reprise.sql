@@ -771,8 +771,8 @@ CREATE TABLE HR_SPRINT_RETENUESALAIRE
 
 (
 PRE_SIREN varchar(35),
-PRE_SALAIRE varchar(10),
-PRE_ORDE int,
+PRE_SALARIE varchar(10),
+PRE_ORDRE int,
 PRE_LIBELLE varchar(35),
 PRE_DATEDEBUT datetime,
 PRE_DATEFIN datetime,
@@ -784,3 +784,5 @@ PRE_REMBMAX char(1)
 
 );
 GO
+
+
