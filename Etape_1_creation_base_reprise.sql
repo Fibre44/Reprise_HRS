@@ -374,7 +374,8 @@ Concaténation 00000+ Code CEMP de HRU + incrémentation automatique'),
 ('Reprise bulletins','-','Indiquer X pour reprendre les bulletins sinon -'),
 ('Partage PLE','-','Indiquer X si partage des libellés emplois'),
 ('Reprise Taux Pas','-','Indiquer X pour reprendre les taux PAS'),
-('Partage Table libre','-','Indiquer X si partage zones libres');
+('Partage Table libre','-','Indiquer X si partage zones libres'),
+('Date de démarrage' ,'01/01/2020','Indiquer la date de démarrage du dossier format JJ/MM/AAAA');
 
 GO
 
