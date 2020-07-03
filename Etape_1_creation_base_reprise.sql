@@ -776,11 +776,12 @@ PRE_ORDRE int,
 PRE_LIBELLE varchar(35),
 PRE_DATEDEBUT datetime,
 PRE_DATEFIN datetime,
-PRE_MONTANTTOT float,
+PRE_MONTANTTOT varchar(255),
 PRE_ACTIF char(1),
 PRE_RETENUESAL char(3),
-PRE_REMBMAX char(1)
-
+PRE_REMBMAX char(1),
+PRE_MONTANTMENS varchar(255),
+PRE_NBMOIS int
 
 );
 GO
