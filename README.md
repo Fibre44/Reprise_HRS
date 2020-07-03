@@ -3,8 +3,8 @@
 # Objectifs : Les scripts ont pour objectifs de transformer des fichiers au format HRU vers le format HRS
 # Périmètre de la reprise HRS
 
--Salaries,
--Contrat de travail,
+- Salaries,
+- Contrat de travail,
 -RIB
 -Enfant des salariés,
 -Convention collective,
