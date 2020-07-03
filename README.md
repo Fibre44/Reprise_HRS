@@ -5,36 +5,36 @@
 
 - Salaries,
 - Contrat de travail,
--RIB
--Enfant des salariés,
--Convention collective,
--Classification,
--Absences salariés 
--Bulletin de paie
--Historique
--Etablissement
--Ventilation analytiques
--Saisies arrets + pensions alimentaires
+- RIB
+- Enfant des salariés,
+- Convention collective,
+- Classification,
+- Absences salariés 
+- Bulletin de paie
+- Historique
+- Etablissement
+- Ventilation analytiques
+- Saisies arrets + pensions alimentaires
 
 # Fichiers HRU nécessaires
 
--CCNEMPLOYEUR,
--EMAIL,
--EMPLOYEUR,
--ENFANTS,
--ENTETEPAIE,
--ETABLISSEMENT,
--EVENEMENTS,
--GENCONTRAT,
--IMPUTATIONANALYTIQUE,
--INDIVIDU,
--PERMSEJOUR,
--VALIDCONTRAT
--SAISIEARRET
--PENSIONALIMENTAURE
--TRSMATRICULE pour la gestion de People Doc
--TRSCLASSIFICATION1
--TRSCLASSIFICATION2
--TRSCLASSIFICATION3
--TRSCLASSIFICATION4
--TRSCLASSIFICATION5
+- CCNEMPLOYEUR,
+- EMAIL,
+- EMPLOYEUR,
+- ENFANTS,
+- ENTETEPAIE,
+- ETABLISSEMENT,
+- EVENEMENTS,
+- GENCONTRAT,
+- IMPUTATIONANALYTIQUE,
+- INDIVIDU,
+- PERMSEJOUR,
+- VALIDCONTRAT
+- SAISIEARRET
+- PENSIONALIMENTAURE
+- TRSMATRICULE pour la gestion de People Doc
+- TRSCLASSIFICATION1
+- TRSCLASSIFICATION2
+- TRSCLASSIFICATION3
+- TRSCLASSIFICATION4
+- TRSCLASSIFICATION5
