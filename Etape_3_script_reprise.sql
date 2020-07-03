@@ -1,8 +1,6 @@
 USE REPRISE_HRU
 
 Go
-
-
 --HRU est monobase HR SPRINT multi bases création d'une table pour ventiler les salariés sur les différents SIREN
 --Attention dans la table individu les salariés ne sont pas dans l'ordre des sociétés
 --La source de données se trouve dans la table GENCONTRAT
@@ -196,61 +194,6 @@ WHILE @VAR_LIGNE_INDIVIDU<=@VAR_TOTAL_INDIVIDUS
 
 GO
 
---Alimentation du tableau de bord nombre de lignes par table et par société  
-
-DECLARE 
-
-@VAR_NATURECONTROLE varchar(255),
-@VAR_RESULTATCONTROLE varchar(255),
-@VAR_COMMENTAIRE varchar(255),
-@VAR_CEMP varchar(255),
-@VAR_SOCIETE_LIGNE int,
-@VAR_SOCIETE_TOTAL int,
-@VAR_NBRE_SALARIE int,
-@VAR_RAISON_SOCIALE varchar(255),
-@VAR_TABLEAU_DE_BORD_TYPE varchar(255),
-@TAB_TABLEAU_DE_BORD_TABLE varchar(255),
-@TAB_TABLEAU_DE_BORD_CEMP varchar(35),
-@TAB_TABLEAU_DE_BORD_VALEUR int;
-
-SET @VAR_TABLEAU_DE_BORD_TYPE='Compteur';
-SET @TAB_TABLEAU_DE_BORD_TABLE='VENTILATION_INDIVIDUS';
-SET @TAB_TABLEAU_DE_BORD_VALEUR=0;
-SET @VAR_NBRE_SALARIE=0;
-SET @VAR_NATURECONTROLE='Nbre de salarié par société';
-SET @VAR_SOCIETE_LIGNE=1;
-SET @VAR_RESULTATCONTROLE='Ok'
-
-SELECT @VAR_SOCIETE_TOTAL=COUNT(*) FROM EMPLOYEUR;
-
-WHILE @VAR_SOCIETE_LIGNE<=@VAR_SOCIETE_TOTAL --pour chaque société on récupére le nbre de salarié
-
-	BEGIN
-	
-	SELECT @VAR_CEMP=Employeur FROM EMPLOYEUR WHERE SOCIETE_LIGNE=@VAR_SOCIETE_LIGNE;
-	SELECT @VAR_NBRE_SALARIE=COUNT(IND_MATRICULEHRS) FROM VENTILATION_INDIVIDUS WHERE @VAR_CEMP=IND_CEMP;
-
-	SET @TAB_TABLEAU_DE_BORD_CEMP=@VAR_CEMP;
-	SET @TAB_TABLEAU_DE_BORD_VALEUR=@VAR_NBRE_SALARIE;
-
-	PRINT 'Pour la société '+@VAR_CEMP+' le nombre de salarié est de '+CAST(@VAR_NBRE_SALARIE AS VARCHAR(255))
-
-	INSERT INTO TABLEAU_DE_BORD
-	VALUES (@VAR_TABLEAU_DE_BORD_TYPE,@TAB_TABLEAU_DE_BORD_TABLE,@TAB_TABLEAU_DE_BORD_CEMP,@TAB_TABLEAU_DE_BORD_VALEUR);
-	
-	SET @VAR_COMMENTAIRE='Pour la société '+@VAR_CEMP+' le nombre de salarié est de '+CAST(@VAR_NBRE_SALARIE AS VARCHAR(255));
-
-	INSERT INTO JOURNAL_DES_TRAITEMENTS --Ajout du commentaire dans la table des traitements
-	VALUES (@VAR_NATURECONTROLE,@VAR_RESULTATCONTROLE,@VAR_COMMENTAIRE);
-	
-	SET @VAR_SOCIETE_LIGNE=@VAR_SOCIETE_LIGNE+1;
-	   	 
-	END
-
-	   
-GO
-
-
 --Gestion de la renumération des matricules
 
 --Le traitement aura lieu dans une table de travail TRAVAIL_RENUMEROTAION_MATRICULE
@@ -258,8 +201,6 @@ GO
 --Pour chaque matricule dans la table VENTILATION_INDIVIDUS on va chercher l'employeur (traitement à optimiser il doit tester le nbre de salarié*nbre de sociétés)
 
 --Si Renumerotation matricule dans la table PARAMETRES = X alors on renumerote sinon on conserve HRU
-
-
 
 DECLARE
 
