@@ -1,0 +1,1 @@
+sqlcmd -S 'A saisir' -U 'A saisir' -P 'A saisir' -i C:\Reprise_FRH\script\Reprise_CCN.sql -i C:\Reprise_FRH\script\Reprise_VENTILATIONINDIVIDUS.sql -o C:\Reprise_FRH\logs\logs.txt
