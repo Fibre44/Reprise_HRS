@@ -396,8 +396,8 @@ CREATE TABLE HR_SPRINT_PAIEENCOURS
 PPU_SIREN varchar(35),
 PPU_ETABLISSEMENT char(3),
 PPU_SALARIE varchar(10),
-PPU_DATEDEBUT datetime,
-PPU_DATEFIN datetime,
+PPU_DATEDEBUT date,
+PPU_DATEFIN date,
 PPU_TOPCLOTURE char(1),
 PPU_TRAVAILN1 char(3),
 PPU_TRAVAILN2 char(3),
@@ -445,8 +445,8 @@ CREATE TABLE HR_SPRINT_HISTOBULLETIN
 PHB_SIREN varchar(35),
 PHB_ETABLISSEMENT char(3),--obligatoire
 PHB_SALARIE varchar(10),--obligatoire
-PHB_DATEDEBUT datetime,--obligatoire
-PHB_DATEFIN datetime,--obligatoire
+PHB_DATEDEBUT date,--obligatoire
+PHB_DATEFIN date,--obligatoire
 PHB_NATURERUB char(3),--obligatoire
 PHB_RUBRIQUE char(5),--obligatoire
 PHB_LIBELLE varchar(35),
@@ -485,8 +485,8 @@ CREATE TABLE HR_SPRINT_HISTOCUMSAL
 PHC_SIREN varchar(255),
 PHC_ETABLISSEMENT char(3),
 PHC_SALARIE varchar(10),
-PHC_DATEDEBUT datetime,
-PHC_DATEFIN datetime,
+PHC_DATEDEBUT date,
+PHC_DATEFIN date,
 PHC_REPRISE char(1),
 PHC_CUMULPAIE char(3),
 PHC_MONTANT varchar(255),
@@ -556,7 +556,7 @@ PEF_PRENOM varchar(35),
 PEF_DATENAISSANCE date,
 PEF_ACHARGE char(1),
 PEF_NATIONALITE char(3),
-PEF_SEXE char(3),
+PEF_SEXE char(1),
 PEF_TYPEPARENTAL char(3),
 );
 

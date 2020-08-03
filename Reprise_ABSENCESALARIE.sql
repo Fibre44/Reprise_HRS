@@ -1,7 +1,7 @@
 USE REPRISE_HRU
 Go
 
---Reprie des absences + CP
+--Reprise des absences + CP
 
 DECLARE
 

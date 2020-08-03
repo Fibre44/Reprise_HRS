@@ -117,8 +117,8 @@ DECLARE
 @VAR_PHB_SIREN varchar(35),
 @VAR_PHB_ETABLISSEMENT char(3),--obligatoire
 @VAR_PHB_SALARIE varchar(10),--obligatoire
-@VAR_PHB_DATEDEBUT datetime,--obligatoire
-@VAR_PHB_DATEFIN datetime,--obligatoire
+@VAR_PHB_DATEDEBUT date,--obligatoire
+@VAR_PHB_DATEFIN date,--obligatoire
 @VAR_PHB_NATURERUB char(3),--obligatoire
 @VAR_PHB_RUBRIQUE char(5),--obligatoire
 @VAR_PHB_LIBELLE varchar(35),
@@ -182,8 +182,8 @@ DECLARE
 @VAR_PHB_SIREN varchar(35),
 @VAR_PHB_ETABLISSEMENT char(3),--obligatoire
 @VAR_PHB_SALARIE varchar(10),--obligatoire
-@VAR_PHB_DATEDEBUT datetime,--obligatoire
-@VAR_PHB_DATEFIN datetime,--obligatoire
+@VAR_PHB_DATEDEBUT date,--obligatoire
+@VAR_PHB_DATEFIN date,--obligatoire
 @VAR_PHB_NATURERUB char(3),--obligatoire
 @VAR_PHB_RUBRIQUE char(5),--obligatoire
 @VAR_PHB_LIBELLE varchar(35),

@@ -7,7 +7,7 @@ GO
 
 --Les contrats sont dans GENCONTRAT (tout reprendre) et les détails se trouvent dans VALIDCONTRAT
 --Jointure GENCONTRAT.GCREF=VALIDCONTRAT.GCREF
---1 contrat plusieurs valeurs dans VALIDOCONTRAT voir comment alimenter PGHISTODETAIL
+--1 contrat plusieurs valeurs dans VALIDCONTRAT voir comment alimenter PGHISTODETAIL
 
 --Pour chaque contrat faire une boucle pour trouver les dernières valeurs
 DECLARE
