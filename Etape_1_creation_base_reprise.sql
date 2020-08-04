@@ -837,5 +837,19 @@ GO
 
 PRINT 'Création table HR_SPRINT_RETENUESALAIRE'
 
+CREATE TABLE STATISTIQUES
+
+(
+
+STA_SIREN varchar(17),
+STA_TABLE varchar(35),
+STA_NBRE_LIGNES int
+
+);
+
+PRINT 'Création table STATISTIQUES'
+
+GO
+
 
 
