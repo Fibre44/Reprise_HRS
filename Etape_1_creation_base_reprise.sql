@@ -383,7 +383,12 @@ Concaténation 00000+ Code CEMP de HRU + incrémentation automatique'),
 ('Partage PLE','-','Indiquer X si partage des libellés emplois'),
 ('Reprise Taux Pas','-','Indiquer X pour reprendre les taux PAS'),
 ('Partage Table libre','-','Indiquer X si partage zones libres'),
-('Date de démarrage' ,'01/01/2020','Indiquer la date de démarrage du dossier format JJ/MM/AAAA');
+('Date de démarrage' ,'01/01/2020','Indiquer la date de démarrage du dossier format JJ/MM/AAAA'),
+('CET ACQUIS','','Indiquer le cumul de CET acquis'),
+('CET PRIS','','Indiquer le cumul de CET pris'),
+('RTT ACQUIS','','Indiquer le cumul de RTT acquis'),
+('RTT PRIS','','Indiquer le cumul de RTT PRIS');
+
 
 GO
 
