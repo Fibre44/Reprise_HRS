@@ -1,7 +1,7 @@
 
 --Création base Reprise
 
-USE master ;  
+USE master ,  
 GO  
 CREATE DATABASE REPRISE_HRU 
 ON   
@@ -16,7 +16,7 @@ LOG ON
     FILENAME = 'C:\Program Files\Microsoft SQL Server\MSSQL13.SQLEXPRESS\MSSQL\DATA\REPRISE_HRU.ldf',  
     SIZE = 5MB,  
     MAXSIZE = 2500MB,  
-    FILEGROWTH = 5MB ) ;  
+    FILEGROWTH = 5MB ) ,  
 
 Print 'Création base REPRISE_HRU '
 
@@ -45,7 +45,7 @@ PSA_DATENAISSANCE datetime,
 PSA_COMMUNENAISS varchar(35),
 PSA_DEPTNAISSANCE char(2),
 PSA_PAYSNAISSANCE char(3),
-PSA_NATIONALITE char(50),
+PSA_NATIONALITE char(3),
 PSA_SEXE char(1),
 PSA_SITUATIONFAMIL char(3),
 PSA_DATEENTREE datetime,
@@ -112,7 +112,7 @@ PSA_UNITETRAVAIL char (2),
 PSA_MOTIFSORTIE char(3),
 PSA_HORHEBDO real,
 PSA_ETATBULLETIN char(3)
-);
+),
 
 PRINT 'Création table SALARIES'
 
@@ -128,7 +128,7 @@ PSE_SIREN varchar(35),
 PSE_SALARIE varchar(10),
 PSE_EMAILPROF varchar(35)
 
-);
+),
 
 PRINT 'Création table DEPORTSAL'
 
@@ -143,7 +143,7 @@ PSZ_SIREN varchar(35),
 PSZ_SALARIE varchar(10),
 PSZ_DIGITALIDENT varchar(50),
 
-);
+),
 
 
 PRINT 'Création table SALARIECOMPL'
@@ -180,7 +180,7 @@ PCI_LIBELLEEMPLOI varchar(35),
 PCI_MOTIFCTINT char(3),
 PCI_MOTIFSORTIE char(3),
 PCI_SIRETANCIEN varchar(17)
-);
+),
 PRINT 'Création table CONTRATRAVAIL'
 GO
 
@@ -199,7 +199,7 @@ T_ADRESSE1 varchar(255),
 T_CODEPOSTAL char(5),
 T_VILLE varchar(35)
 
-);
+),
 
 PRINT 'Création table TIERS'
 GO
@@ -225,7 +225,7 @@ R_ACOMPTE char(1),
 R_PAYS char(3),
 R_DEVISE char(3)
 
-);
+),
 
 
 PRINT 'Création table RIB'
@@ -260,7 +260,7 @@ IND_REPRISE_HR_SPRINT_PASTAUX char(1),
 IND_REPRISE_HR_SPRINT_ABSENCESALARIE char(1),
 IND_REPRISE_HR_SPRINT_PGHISTODETAIL char(1)
 
-);
+),
 
 GO
 
@@ -276,7 +276,7 @@ JOU_NATURE varchar(255),
 JOU_RESULTAT varchar(2),
 JOU_COMMENTAIRE varchar(255)
 
-);
+),
 GO
 
 PRINT 'Création table JOURNAL_DES_TRAITEMENTS'
@@ -305,7 +305,7 @@ TRAV1_CEMP varchar(35),
 TRAV1_MATRICULEHRU varchar(7),
 TRAV1_MATRICULEHRS_TEMPORAIRE int,
 TRAV1_MATRICULEHRS varchar(10),
-);
+),
 
 GO
 
@@ -320,7 +320,7 @@ TRA_TYPE varchar(35),
 TRA_VALEURHRU varchar(35),
 TRA_VALEURHRS varchar(35),
 TRA_SIREN varchar(35),
-);
+),
 GO
 
 PRINT 'Création table TRANSCO'
@@ -334,7 +334,7 @@ CC_TYPE char(3),
 CC_CODE char(3),
 CC_LIBELLE varchar(35),
 CC_ABREGE varchar(35)
-);
+),
 
 Go
 
@@ -347,7 +347,7 @@ PAR_NOM varchar(35),
 PAR_VALEUR varchar(35),
 PAR_COMMENTAIRES varchar(255)
 
-);
+),
 
 GO
 
@@ -388,7 +388,7 @@ Concaténation 00000+ Code CEMP de HRU + incrémentation automatique'),
 ('CET ACQUIS','','Indiquer le cumul de CET acquis'),
 ('CET PRIS','','Indiquer le cumul de CET pris'),
 ('RTT ACQUIS','','Indiquer le cumul de RTT acquis'),
-('RTT PRIS','','Indiquer le cumul de RTT PRIS');
+('RTT PRIS','','Indiquer le cumul de RTT PRIS'),
 
 
 GO
@@ -437,7 +437,7 @@ PPU_DENOMINTRENT int,
 PPU_NUMERATTRENT int,
 PPU_CIVILITE char(3),
 
-);
+),
 
 GO
 
@@ -476,7 +476,7 @@ PHB_LIBREPCMB2 char(3),
 PHB_LIBREPCMB3 char(3),
 PHB_LIBREPCMB4 char(3),
 
-);
+),
 
 GO
 
@@ -505,7 +505,7 @@ PHC_LIBREPCMB1 char(3),
 PHC_LIBREPCMB2 char(3),
 PHC_LIBREPCMB3 char(3),
 PHC_LIBREPCMB4 char(3),
-);
+),
 
 GO
 
@@ -525,7 +525,7 @@ PMI_LIBELLE varchar(35),
 PMI_PREDEFINI char(3),
 PMI_NODOSSIER char(6),
 
-);
+),
 
 GO
 
@@ -545,7 +545,7 @@ PKT_CRM varchar(18),
 PKT_DTPUBLICATION datetime,
 PKT_TAUXDGFIP varchar(5),
 
-);
+),
 
 GO
 
@@ -564,7 +564,7 @@ PEF_ACHARGE char(1),
 PEF_NATIONALITE char(3),
 PEF_SEXE char(1),
 PEF_TYPEPARENTAL char(3),
-);
+),
 
 GO
 
@@ -598,7 +598,7 @@ PCN_TYPEIMPUTE char(3),
 PCN_ETATPOSTPAIE char(3),
 PCN_CODETAPE char(1),
 PCN_NBREMOIS real
-);
+),
 
 Go
 
@@ -624,7 +624,7 @@ ET_SIRET char(14),
 ET_APE char(5),
 
 
-);
+),
 
 GO
 
@@ -650,7 +650,7 @@ PHD_CODEPOP char(1),
 PHD_POPULATION char(1)
 
 
-);
+),
 
 GO
 
@@ -677,7 +677,7 @@ CVE_SOUSPLAN5 varchar(17),
 CVE_SOUSPLAN6 varchar(17),
 CVE_TYPE char(3)
 
-);
+),
 
 GO
 
@@ -696,7 +696,7 @@ CSP_SECTION varchar(17),
 CSP_ABREGE varchar(35),
 CSP_LIBELLE varchar(35)
 
-);
+),
 GO
 
 PRINT 'Création table HR_SPRINT_CSECTION'
@@ -713,7 +713,7 @@ PCV_PREDEFINI varchar(3),
 PCV_NODOSSIER varchar(6),
 PCV_IDCC varchar(17)
 
-);
+),
 
 GO
 
@@ -741,7 +741,7 @@ X_CPESTRUCT char(1),
 X_FERME char(1),
 X_SAISIETRANCHE char(1)
 
-);
+),
 GO
 
 PRINT 'Création table HR_SPRINT_AXE'
@@ -756,7 +756,7 @@ COR_VALEURHRU char(35),
 COR_VALEURHRU_COMMENTAIRE varchar(255),
 COR_VALEURHRS char(35),
 COR_VALEURHRS_COMMENTAIRE varchar(255),
-);
+),
 
 GO
 
@@ -768,7 +768,7 @@ VALUES
 ('CISEX','01','Homme','M','Homme'),
 ('CISEX','02','Femme','F','Femme')
 
-;
+,
 
 GO
 
@@ -779,7 +779,7 @@ CREATE TABLE VALEUR_POSSIBLE_CCN
 VAL_CODE char(3),
 VAL_UTILISER char(1),
 VAL_LIGNE  INT IDENTITY
-);
+),
 
 PRINT 'Création table VALEUR_POSSIBLE_CCN'
 
@@ -793,7 +793,7 @@ VALUES
 ('013','-'),
 ('021','-'),
 ('023','-'),
-('031','-');
+('031','-'),
 
 GO
 
@@ -810,7 +810,7 @@ VEN_SECTION varchar(17),
 VEN_POURCENTAGE varchar(255),
 VEN_NUMEROVENTILATION int
 
-);
+),
 
 GO
 
@@ -833,7 +833,7 @@ PRE_REMBMAX char(1),
 PRE_MONTANTMENS varchar(255),
 PRE_NBMOIS int
 
-);
+),
 GO
 
 PRINT 'Création table HR_SPRINT_RETENUESALAIRE'
@@ -846,7 +846,7 @@ STA_SIREN varchar(17),
 STA_TABLE varchar(35),
 STA_NBRE_LIGNES int
 
-);
+),
 
 PRINT 'Création table STATISTIQUES'
 
