@@ -721,6 +721,7 @@ GO
 UPDATE HR_SPRINT_SALARIES SET PSA_LIBELLE=PSA_NOMJF WHERE PSA_SEXE='M';--recopie les noms de jeune fille sur le champ nom d'usage pour les hommes
 UPDATE HR_SPRINT_SALARIES SET PSA_NOMJF='' WHERE PSA_SEXE='M';--RAZ du champ nom de jeune fille pour les hommes
 UPDATE HR_SPRINT_SALARIES SET PSA_LIBELLE=PSA_NOMJF WHERE PSA_SEXE='F' AND PSA_LIBELLE='';--on recopie les noms de de jeune fille sur le champ nom d'usage pour les femmes
+UPDATE HR_SPRINT_SALARIES SET PSA_HORAIREMOIS=0, PSA_HORHEBDO=0 WHERE PSA_HORAIREMOIS IS NULL --suppression des valeurs à NULL
 
 GO
 
