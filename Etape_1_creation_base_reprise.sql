@@ -388,8 +388,8 @@ Concaténation 00000+ Code CEMP de HRU + incrémentation automatique'),
 ('CET ACQUIS','','Indiquer le cumul de CET acquis'),
 ('CET PRIS','','Indiquer le cumul de CET pris'),
 ('RTT ACQUIS','','Indiquer le cumul de RTT acquis'),
-('RTT PRIS','','Indiquer le cumul de RTT PRIS');
-
+('RTT PRIS','','Indiquer le cumul de RTT PRIS'),
+('Acquis CP','','Le Nbre de jours acquis CP');
 
 GO
 
@@ -597,7 +597,8 @@ PCN_PERIODEPY char(2),
 PCN_TYPEIMPUTE char(3),
 PCN_ETATPOSTPAIE char(3),
 PCN_CODETAPE char(1),
-PCN_NBREMOIS real
+PCN_NBREMOIS real,
+PCN_CODESTAT char(3)
 );
 
 Go
