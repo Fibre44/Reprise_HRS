@@ -382,7 +382,7 @@ BEGIN
 			SET @VAR_NATURECONTROLE='Transco CTA04';
 			SET @VAR_RESULTATCONTROLE='Ok';
 
-			PRINT 'Le code CTA04 de HRU '+@VAR_CTA4_VALEUR_HRU+' a déjà été traité contrat en cours '+CAST(@VAR_CONTRAT_EN_COURS AS varchar(255))+'/'+CAST(@VAR_CONTRAT_TOTAL AS VARCHAR(255)) 
+			PRINT 'Le code CTA04 de HRU '+@VAR_CTA04_VALEUR_HRU+' a déjà été traité contrat en cours '+CAST(@VAR_CONTRAT_EN_COURS AS varchar(255))+'/'+CAST(@VAR_CONTRAT_TOTAL AS VARCHAR(255)) 
 		END
 
 	--Gestion du code CTA05
