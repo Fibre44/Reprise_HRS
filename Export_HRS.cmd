@@ -1,7 +1,7 @@
 SET COLONNE1='='
 SET COLONNE2='1'
 SET SIREN=754015899
-sqlcmd -S 10.113.24.6 -U NicolasDenis -P NDenis!2020 -i .\script\Export.sql -s "|" -W -h -1
+sqlcmd -S Serveur -U Login -P MP -i .\script\Export.sql -s "|" -W -h -1
 COPY .\En_Tete\SALARIES_EN_TETE.asc + .\fichiers_hrs\SALARIES.asc .\fichiers_hrs\%SIREN%_SALARIES.asc
 COPY .\En_Tete\CONTRATTRAVAIL_EN_TETE.asc + .\fichiers_hrs\CONTRATTRAVAIL.asc .\fichiers_hrs\%SIREN%_CONTRATTRAVAIL.asc
 COPY .\En_Tete\RIB_EN_TETE.asc + .\fichiers_hrs\RIB.asc .\fichiers_hrs\%SIREN%_RIB.asc
