@@ -10,8 +10,14 @@ dtexec /f ".\dtsx\TAUXPAS.dtsx" /l "DTS.LogProviderTextFile;.\logs\log_tauxpas.t
 dtexec /f ".\dtsx\ENTETEPAIE.dtsx" /l "DTS.LogProviderTextFile;.\logs\log_entetepaie.txt"    
 dtexec /f ".\dtsx\ETABLISSEMENTS.dtsx" /l "DTS.LogProviderTextFile;.\logs\log_etablissements.txt"    
 dtexec /f ".\dtsx\SAISIEARRET.dtsx" /l "DTS.LogProviderTextFile;.\logs\log_saisiearret.txt"  
+dtexec /f ".\dtsx\PENSIONALIMENTAIRE.dtsx" /l "DTS.LogProviderTextFile;.\logs\log_pensionalimentaire.txt"  
 dtexec /f ".\dtsx\COMPTEURS.dtsx" /l "DTS.LogProviderTextFile;.\logs\log_compteurs.txt"    
 dtexec /f ".\dtsx\CLASSIF1.dtsx" /l "DTS.LogProviderTextFile;.\logs\log_classif1.txt"     
 dtexec /f ".\dtsx\CLASSIF3.dtsx" /l "DTS.LogProviderTextFile;.\logs\log_classif3.txt" 
 dtexec /f ".\dtsx\CLASSIF4.dtsx" /l "DTS.LogProviderTextFile;.\logs\log_classif4.txt"        
-dtexec /f ".\dtsx\CLASSIF5.dtsx" /l "DTS.LogProviderTextFile;.\logs\log_classif5.txt"          
+dtexec /f ".\dtsx\CLASSIF5.dtsx" /l "DTS.LogProviderTextFile;.\logs\log_classif5.txt"     
+dtexec /f ".\dtsx\IMPUTATIONANALYTIQUE.dtsx" /l "DTS.LogProviderTextFile;.\logs\log_analytique.txt"
+dtexec /f ".\dtsx\CCN.dtsx" /l "DTS.LogProviderTextFile;.\logs\log_CCN.txt"   
+sqlcmd -S 10.113.24.6 -U NicolasDenis -P NDenis!2020 -i .\script\Modifications_tables_HRU.sql
+sqlcmd -S 10.113.24.6 -U NicolasDenis -P NDenis!2020 -i .\script\Ajout_Nom_des_tables.sql
+           

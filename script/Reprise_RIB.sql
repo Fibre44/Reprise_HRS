@@ -112,9 +112,9 @@ IF @VAR_R_CODEIBAN<>'' --si le salarié a un IBAN
 
 	ELSE--si le salarié n'a pas d'IBAN
 
-	PRINT 'Le salarié n a pas d IBAN passage au salarié suivant '+CAST(@VAR_SALARIE_LIGNE AS varchar(255))+'/'+CAST(@VAR_SALARIE_TOTAL AS varchar(255))
+	PRINT 'Le salarié n a pas d IBAN passage au salarié suivant '+@VAR_CMATR+CAST(@VAR_SALARIE_LIGNE AS varchar(255))+'/'+CAST(@VAR_SALARIE_TOTAL AS varchar(255))
 	
-	SET @VAR_COMMENTAIRE='Le salarié n a pas d IBAN passage au salarié suivant '+CAST(@VAR_SALARIE_LIGNE AS varchar(255))+'/'+CAST(@VAR_SALARIE_TOTAL AS varchar(255));
+	SET @VAR_COMMENTAIRE='Le salarié n a pas d IBAN passage au salarié suivant matricule en cours '+@VAR_CMATR+CAST(@VAR_SALARIE_LIGNE AS varchar(255))+'/'+CAST(@VAR_SALARIE_TOTAL AS varchar(255));
 	SET @VAR_RESULTATCONTROLE='Ok';
 
 	INSERT INTO JOURNAL_DES_TRAITEMENTS  --Ajout du commentaire dans la table des traitements

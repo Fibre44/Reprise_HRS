@@ -389,7 +389,8 @@ Concaténation 00000+ Code CEMP de HRU + incrémentation automatique'),
 ('CET PRIS','','Indiquer le cumul de CET pris'),
 ('RTT ACQUIS','','Indiquer le cumul de RTT acquis'),
 ('RTT PRIS','','Indiquer le cumul de RTT PRIS'),
-('Acquis CP','','Le Nbre de jours acquis CP');
+('Acquis CP','','Le Nbre de jours acquis CP'),
+('Conservation code etb','X','Indiquer X pour conserver le code ETB de SYNAPPS');
 
 GO
 
