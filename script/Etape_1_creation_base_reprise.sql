@@ -364,7 +364,7 @@ VALUES
 ('TABLETRAVAILN2','-','Indiquer le nom de la colonne HRU'),
 ('TABLETRAVAILN3','-','Indiquer le nom de la colonne HRU'),
 ('TABLETRAVAILN4','CTA04','Indiquer le nom de la colonne HRU'),
-('CODESTAT','CTAP1','Indiquer le nom de la colonne HRU'),
+('CODESTAT','CTA1','Indiquer le nom de la colonne HRU'),
 ('TABLETTELIBRE1','-','Indiquer le nom de la colonne HRU'),
 ('TABLETTELIBRE2','-','Indiquer le nom de la colonne HRU'),
 ('TABLETTELIBRE4','-','Indiquer le nom de la colonne HRU'),
