@@ -379,7 +379,7 @@ ELSE --si le salarié n'est pas encore migré
 			BEGIN
 				SET @VAR_PSA_DADSPROF='29';
 			END
-			IF  @VAR_DADSPROF_TEMP='04'--si dirigeant
+			IF  @VAR_DADSPROF_TEMP='03'--si dirigeant
 			BEGIN
 				SET @VAR_PSA_DADSPROF='13';
 			END
