@@ -148,7 +148,8 @@ DECLARE
 @VAR_CCDEP_TEST char(3),
 @VAR_PAR_PLE_PARTAGE char(1),
 @VAR_PAR_TABLE_LIBRE_PARTAGE char(1),
-@VAR_NOM_TABLE char(8);
+@VAR_NOM_TABLE char(8),
+@VAR_DADSPROF_TEMP char(2);
 
 SET @VAR_NOM_TABLE='SALARIES'
 SET @VAR_T_COLLECTIF='421000'
@@ -230,7 +231,8 @@ ELSE --si le salarié n'est pas encore migré
 			@VAR_PSA_HORAIREMOIS=QHMOI,--récupération horaire mois
 			@VAR_PSA_SALAIREMOIS1=CAST(MSM AS varchar(35)),--récupération du salaire
 			@VAR_TAUX_TEMPS_PARTIEL_SALARIE=APTAC,--taux temps partiel
-			@VAR_PSA_DADSCAT=CCATS
+			@VAR_PSA_DADSCAT=CCATS,
+			@VAR_DADSPROF_TEMP=STCON --récupération du code DADS PROF
 			FROM VALIDCONTRAT
 			WHERE MATRI=@VAR_CMATR AND CEMP=@VAR_CEMP_SALARIE
 			ORDER BY DVCTR DESC; 
@@ -361,13 +363,17 @@ ELSE --si le salarié n'est pas encore migré
 				SET @VAR_PSA_CONDEMPLOI='P';
 			END
 		
-			IF @VAR_PSA_DADSCAT='01'
+			IF @VAR_DADSPROF_TEMP='07'--si ouvrier
 				BEGIN
-				SET @VAR_PSA_DADSPROF='29';
+				SET @VAR_PSA_DADSPROF='01';
 				END
-			ELSE 
+			IF  @VAR_DADSPROF_TEMP='06'--si employé
 				BEGIN
 				SET @VAR_PSA_DADSPROF='02';
+				END
+			IF  @VAR_DADSPROF_TEMP='05'--si cadre
+				BEGIN
+				SET @VAR_PSA_DADSPROF='29';
 				END
 			--Activation des valeurs par default
 			SET @VAR_PSA_UNITEPRISEFF=1;
