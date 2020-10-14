@@ -371,10 +371,13 @@ ELSE --si le salarié n'est pas encore migré
 				BEGIN
 				SET @VAR_PSA_DADSPROF='02';
 				END
-			IF  @VAR_DADSPROF_TEMP='05'--si cadre
+			IF  @VAR_DADSPROF_TEMP='05'--si assimilé cadre
 				BEGIN
 				SET @VAR_PSA_DADSPROF='29';
 				END
+			IF  @VAR_DADSPROF_TEMP='04'--si cadre
+				BEGIN
+				SET @VAR_PSA_DADSPROF='29';
 			--Activation des valeurs par default
 			SET @VAR_PSA_UNITEPRISEFF=1;
 			SET @VAR_PSA_UNITETRAVAIL='07';
