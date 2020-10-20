@@ -38,6 +38,8 @@ PSA_NOMJF varchar(35),
 PSA_PRENOM varchar(35),
 PSA_ETABLISSEMENT char(3),
 PSA_ADRESSE1 varchar(35),
+PSA_ADRESSE2 varchar(35),
+PSA_ADRESSE3 varchar(35),
 PSA_CODEPOSTAL char(9),
 PSA_VILLE varchar(50),
 PSA_PAYS varchar(3),
@@ -111,7 +113,8 @@ PSA_NATURETAUXPAS char(3),
 PSA_UNITETRAVAIL char (2),
 PSA_MOTIFSORTIE char(3),
 PSA_HORHEBDO real,
-PSA_ETATBULLETIN char(3)
+PSA_ETATBULLETIN char(3),
+SALARIES char(8)
 );
 
 PRINT 'Création table SALARIES'
