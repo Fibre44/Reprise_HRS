@@ -16,7 +16,7 @@ DECLARE
 @VAR_CC_LIBELLE varchar(35),
 @VAR_CC_ABREGE varchar(35),
 @VAR_CC_LIBRE varchar(35),
-@VAR_NOM_TABLE varchar(7),
+@VAR_NOM_TABLE varchar(8),
 @VAR_TRA_TYPE varchar(35),
 @VAR_PMI_SIREN varchar(35),
 @VAR_PMI_NATURE char(3),
