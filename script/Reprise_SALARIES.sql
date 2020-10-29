@@ -151,7 +151,9 @@ DECLARE
 @VAR_PAR_PLE_PARTAGE char(1),
 @VAR_PAR_TABLE_LIBRE_PARTAGE char(1),
 @VAR_NOM_TABLE char(8),
-@VAR_DADSPROF_TEMP char(2);
+@VAR_DADSPROF_TEMP char(2),
+@VAR_AN_TYPE varchar(255),
+@VAR_AN_COMMENTAIRE varchar(255);
 
 SET @VAR_NOM_TABLE='SALARIES'
 SET @VAR_T_COLLECTIF='421000'
@@ -286,6 +288,16 @@ ELSE --si le salarié n'est pas encore migré
 			SELECT @VAR_PSA_ETABLISSEMENT=TRA_VALEURHRS FROM TRANSCO WHERE TRA_TYPE='Etablissement' AND TRA_VALEURHRU=@VAR_ETABLISSEMENT_SALARIE AND TRA_SIREN=@VAR_PSA_SIREN;--récupération code établissement HRS
 			
 			Print 'Le code établissement HRU est : '+@VAR_ETABLISSEMENT_SALARIE+' le code HRS est : '+@VAR_PSA_ETABLISSEMENT
+
+			IF @VAR_PSA_ETABLISSEMENT='' --alors anomalie
+
+			BEGIN
+
+				SET @VAR_AN_TYPE= 'Code etablissement vide'
+				SET @VAR_AN_COMMENTAIRE='Le code établissement HRU est : '+@VAR_ETABLISSEMENT_SALARIE+' le code HRS est : '+@VAR_PSA_ETABLISSEMENT
+				INSERT INTO ANOMALIES
+				VALUES (@VAR_AN_TYPE,@VAR_PSA_SALARIE,@VAR_AN_COMMENTAIRE);
+			END
 
 			--Gestion du code pays de naissance
 			SET @VAR_PSA_PAYS='FRA';--Pays mot RHPI ADPY voir si besoin de transco
