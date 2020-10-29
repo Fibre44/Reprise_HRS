@@ -285,6 +285,8 @@ ELSE --si le salarié n'est pas encore migré
 
 			SELECT @VAR_PSA_ETABLISSEMENT=TRA_VALEURHRS FROM TRANSCO WHERE TRA_TYPE='Etablissement' AND TRA_VALEURHRU=@VAR_ETABLISSEMENT_SALARIE AND TRA_SIREN=@VAR_PSA_SIREN;--récupération code établissement HRS
 			
+			Print 'Le code établissement HRU est : '+@VAR_ETABLISSEMENT_SALARIE+' le code HRS est : '+@VAR_PSA_ETABLISSEMENT
+
 			--Gestion du code pays de naissance
 			SET @VAR_PSA_PAYS='FRA';--Pays mot RHPI ADPY voir si besoin de transco
 			IF @VAR_PSA_PAYSNAISSANCE_TEMP='FR'
@@ -387,9 +389,19 @@ ELSE --si le salarié n'est pas encore migré
 			BEGIN
 				SET @VAR_PSA_DADSPROF='13';
 			END
+
+			IF @VAR_PSA_HORAIREMOIS=0--gestion des salariés aux forfaits jours
+			BEGIN
+				SET @VAR_PSA_UNITETRAVAIL='03'
+			END
+
+			ELSE--cas des salariés en heures
+			BEGIN
+				SET @VAR_PSA_UNITETRAVAIL='01';
+			END						
+
 			--Activation des valeurs par default
 			SET @VAR_PSA_UNITEPRISEFF=1;
-			SET @VAR_PSA_UNITETRAVAIL='07';
 			SET @VAR_PSA_MOTIFENTREE='001';
 			SET @VAR_PSA_PRISEFFECTIF='X';
 			SET @VAR_PSA_CONGESPAYES='X';
