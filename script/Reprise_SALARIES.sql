@@ -391,7 +391,7 @@ ELSE --si le salarié n'est pas encore migré
 			END
 			IF  @VAR_DADSPROF_TEMP='05'--si assimilé cadre
 			BEGIN
-				SET @VAR_PSA_DADSPROF='29';
+				SET @VAR_PSA_DADSPROF='04';--agent de maitrise
 			END
 			IF  @VAR_DADSPROF_TEMP='04'--si cadre
 			BEGIN
