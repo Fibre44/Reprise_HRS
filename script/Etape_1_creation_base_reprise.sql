@@ -114,7 +114,16 @@ PSA_UNITETRAVAIL char (2),
 PSA_MOTIFSORTIE char(3),
 PSA_HORHEBDO real,
 PSA_ETATBULLETIN char(3),
-SALARIES char(8)
+SALARIES char(8),
+PSA_PROFILREM char(3),
+PSA_PROFIL char(3),
+PSA_PROFILPRE char(3),
+PSA_PROFILMUT char(3),
+PSA_TYPPROFIL char(3),
+PSA_TYPPROFILMUT char(3),
+PSA_TYPPROFILPRE char(3),
+PSA_TYPPROFILREM char(3),
+
 );
 
 PRINT 'Création table SALARIES'
@@ -395,7 +404,9 @@ Concaténation 00000+ Code CEMP de HRU + incrémentation automatique'),
 ('RTT ACQUIS','','Indiquer le cumul de RTT acquis'),
 ('RTT PRIS','','Indiquer le cumul de RTT PRIS'),
 ('Acquis CP','2,08','Le Nbre de jours acquis CP'),
-('Conservation code etb','X','Indiquer X pour conserver le code ETB de SYNAPPS');
+('Conservation code etb','X','Indiquer X pour conserver le code ETB de SYNAPPS'),
+('TRANSCO_PROFIL','-','Indiquer X pour transcoder les profils');
+
 
 GO
 
@@ -853,6 +864,35 @@ STA_NBRE_LIGNES int
 );
 
 PRINT 'Création table STATISTIQUES'
+
+GO
+
+CREATE TABLE PROFILS
+
+(
+
+PRO_SIREN char(9),
+PRO_INTITULE varchar(35),
+PRO_DADSPROF char(3),
+PRO_PREDEFINIREM char(3),
+PRO_PROFILREM char(3),
+PRO_PREDEFINITYPE char(3),
+PRO_PROFILTYPE char(3),
+PRO_PREDEFINIMUTUELLE char(3),
+PRO_PROFILMUTUELLE char(3),
+PRO_PREDEFINIPREVOYANCE char(3),
+PRO_PROFILPREVOYANCE char(3)
+);
+
+GO
+
+
+INSERT INTO PROFILS
+VALUES
+('999999999','Ouvrier','01','ETB','101','ETB','001','ETB','M01','ETB','401'),
+('999999999','Employé','02','ETB','101','ETB','001','ETB','M01','ETB','401'),
+('999999999','Cadre article 4','29','PER','103','PER','003','ETB','M01','ETB','403'),
+('999999999','Agent de maitrise','04','ETB','10A','ETB','00A','ETB','M01','ETB','401');
 
 GO
 
