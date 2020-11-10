@@ -4,7 +4,7 @@ GO
 
 DECLARE
 
-@VAR_PSA_SIREN varchar(255),--SIREN de la société
+@VAR_PSA_SIREN varchar(255),--SIREN de la sociÃ©tÃ©
 @VAR_PSA_SALARIE varchar(10),--
 @VAR_PSA_NUMEROSS varchar(15),
 @VAR_PSA_LIBELLE varchar(35),
@@ -127,17 +127,17 @@ DECLARE
 @VAR_PSA_CONVENTION varchar(17),
 @VAR_PSA_CONVENTION_TEMPORAIRE varchar(17),
 @VAR_PSA_ETATBULLETIN char(3),
-@VAR_SOCIETE_LIGNE int,--société en cours
-@VAR_SOCIETE_TOTAL int,--total des sociétés
+@VAR_SOCIETE_LIGNE int,--sociÃ©tÃ© en cours
+@VAR_SOCIETE_TOTAL int,--total des sociÃ©tÃ©s
 @VAR_RAISON_SOCIALE varchar(255),
 @VAR_NATURECONTROLE varchar(255),
 @VAR_RESULTATCONTROLE varchar(255),
 @VAR_COMMENTAIRE varchar(255),
 @VAR_CEMP varchar(255),
-@VAR_LIGNE_INDIVIDU int,--salarié en cours table individu
+@VAR_LIGNE_INDIVIDU int,--salariÃ© en cours table individu
 @VAR_CMATR varchar(35), --matricule en cours 
-@VAR_TOTAL_INDIVIDUS int,--donne le nombre de salariés par sociétés
-@VAR_CEMP_SALARIE varchar(35),--CEMP du salarié en cours
+@VAR_TOTAL_INDIVIDUS int,--donne le nombre de salariÃ©s par sociÃ©tÃ©s
+@VAR_CEMP_SALARIE varchar(35),--CEMP du salariÃ© en cours
 @VAR_STATUT_MIGRATION varchar(35),
 @VAR_T_NATUREAUXILIAIRE char(3),
 @VAR_T_LIBELE varchar(255),
@@ -172,82 +172,82 @@ SELECT @VAR_PAR_TRANSCOPROFIL=PAR_VALEUR FROM PARAMETRES WHERE PAR_NOM='TRANSCO_
 SELECT @VAR_LIGNE_INDIVIDU=MIN(IND_LIGNE) FROM VENTILATION_INDIVIDUS;
 SELECT @VAR_TOTAL_INDIVIDUS=MAX(IND_LIGNE) FROM VENTILATION_INDIVIDUS;
 
-WHILE @VAR_LIGNE_INDIVIDU<=@VAR_TOTAL_INDIVIDUS  --Boucle par salariés 
+WHILE @VAR_LIGNE_INDIVIDU<=@VAR_TOTAL_INDIVIDUS  --Boucle par salariÃ©s 
 	
 BEGIN
 
 SELECT
-@VAR_CMATR=IND_MATRICULEHRU,--Récupération du matricule en cours
-@VAR_PSA_SIREN=IND_SIREN,--Récupération du SIREN
-@VAR_CEMP_SALARIE=IND_CEMP,--récupération de l'employeur du salarié
-@VAR_STATUT_MIGRATION=IND_STATUS, --récupération du statut de la migration
-@VAR_PSA_AUXILIAIRE=IND_AUXILIAIRE, --récupération du compte auxiliaire
-@VAR_PSA_SALARIE=IND_MATRICULEHRS --récupération du matricule HRS
+@VAR_CMATR=IND_MATRICULEHRU,--RÃ©cupÃ©ration du matricule en cours
+@VAR_PSA_SIREN=IND_SIREN,--RÃ©cupÃ©ration du SIREN
+@VAR_CEMP_SALARIE=IND_CEMP,--RÃ©cupÃ©ration de l'employeur du salariÃ©
+@VAR_STATUT_MIGRATION=IND_STATUS, --RÃ©cupÃ©ration du statut de la migration
+@VAR_PSA_AUXILIAIRE=IND_AUXILIAIRE, --RÃ©cupÃ©ration du compte auxiliaire
+@VAR_PSA_SALARIE=IND_MATRICULEHRS --RÃ©cupÃ©ration du matricule HRS
 FROM VENTILATION_INDIVIDUS WHERE IND_LIGNE=@VAR_LIGNE_INDIVIDU; 
 
 IF @VAR_STATUT_MIGRATION='Etape Salaries'
 		
 	BEGIN
 
-	PRINT 'Société en cours '+@VAR_CEMP+' société '+CAST(@VAR_SOCIETE_LIGNE AS VARCHAR(255))+'/'+CAST(@VAR_SOCIETE_TOTAL AS VARCHAR(255))+' le salarié est déjà migré '+@VAR_CMATR+' ligne en cours'+CAST(@VAR_LIGNE_INDIVIDU AS VARCHAR(255))+'/'+CAST(@VAR_TOTAL_INDIVIDUS AS VARCHAR(255))
+	PRINT 'SociÃ©tÃ© en cours '+@VAR_CEMP+' sociÃ©tÃ© '+CAST(@VAR_SOCIETE_LIGNE AS VARCHAR(255))+'/'+CAST(@VAR_SOCIETE_TOTAL AS VARCHAR(255))+' le salariÃ© est dÃ©jÃ© migrÃ© '+@VAR_CMATR+' ligne en cours'+CAST(@VAR_LIGNE_INDIVIDU AS VARCHAR(255))+'/'+CAST(@VAR_TOTAL_INDIVIDUS AS VARCHAR(255))
 
 	SET @VAR_LIGNE_INDIVIDU=@VAR_LIGNE_INDIVIDU+1;
 
 
 	END 
 
-ELSE --si le salarié n'est pas encore migré
+ELSE --si le salariÃ© n'est pas encore migrÃ©
 
 	BEGIN
 		
 		UPDATE VENTILATION_INDIVIDUS SET IND_STATUS='En cours' WHERE IND_MATRICULEHRU=@VAR_CMATR;
 
-		PRINT 'Le salarié '+@VAR_PSA_SALARIE+'a été traité '+CAST(@VAR_LIGNE_INDIVIDU AS VARCHAR(255))+'/'+CAST(@VAR_TOTAL_INDIVIDUS AS VARCHAR(255))
+		PRINT 'Le salariÃ© '+@VAR_PSA_SALARIE+'a Ã©tÃ© traitÃ© '+CAST(@VAR_LIGNE_INDIVIDU AS VARCHAR(255))+'/'+CAST(@VAR_TOTAL_INDIVIDUS AS VARCHAR(255))
 
 		--Table source INDIVIDU
 
 			SELECT
-			@VAR_PSA_NUMEROSS=CONCAT(NSECU,CSECU), --récupération du numéro SS
-			@VAR_PSA_PRENOM=LPNOM, --récupération du prénom
-			@VAR_PSA_ADRESSE1=LRUES,--récupération adresse 1
-			@VAR_PSA_ADRESSE2=LRUSS,--récupération adresse 2
-			@VAR_PSA_ADRESSE3=AD1LV,--récuparéation adresse 3
-			@VAR_PSA_CODEPOSTAL=CPOST,--récupération du code postal
-			@VAR_PSA_VILLE=LVILS,--récupération ville
-			@VAR_PSA_DATENAISSANCE=CAST(DNAIS AS datetime),--récupération datetime de naissance
-			@VAR_PSA_COMMUNENAISS=LNAIS,--récupération villet de naissance
-			@VAR_PSA_DEPTNAISSANCE=RIGHT(LEFT(NSECU,7),2),--récupération code postal de naissance dans le numéro SS
-			@VAR_PSA_PAYSNAISSANCE_TEMP=PNAIS,--récupération pays de naissance
-			@VAR_PSA_NATIONALITE_TEMP=LNATI,--récupération de la nationalité
+			@VAR_PSA_NUMEROSS=CONCAT(NSECU,CSECU), --RÃ©cupÃ©ration du numÃ©ro SS
+			@VAR_PSA_PRENOM=LPNOM, --RÃ©cupÃ©ration du prÃ©nom
+			@VAR_PSA_ADRESSE1=LRUES,--RÃ©cupÃ©ration adresse 1
+			@VAR_PSA_ADRESSE2=LRUSS,--RÃ©cupÃ©ration adresse 2
+			@VAR_PSA_ADRESSE3=AD1LV,--RÃ©cupÃ©ration adresse 3
+			@VAR_PSA_CODEPOSTAL=CPOST,--RÃ©cupÃ©ration du code postal
+			@VAR_PSA_VILLE=LVILS,--RÃ©cupÃ©ration ville
+			@VAR_PSA_DATENAISSANCE=CAST(DNAIS AS datetime),--RÃ©cupÃ©ration datetime de naissance
+			@VAR_PSA_COMMUNENAISS=LNAIS,--RÃ©cupÃ©ration villet de naissance
+			@VAR_PSA_DEPTNAISSANCE=RIGHT(LEFT(NSECU,7),2),--RÃ©cupÃ©ration code postal de naissance dans le numÃ©ro SS
+			@VAR_PSA_PAYSNAISSANCE_TEMP=PNAIS,--RÃ©cupÃ©ration pays de naissance
+			@VAR_PSA_NATIONALITE_TEMP=LNATI,--RÃ©cupÃ©ration de la nationalitÃ©
 			@VAR_SEXE_TRANSCO=CISEX,--code sexe HRU
 			@VAR_SITUATIONFAMIL=CSITF,--code situation familiale HRU
-			@VAR_PSA_NOMJF=NMFAM,--récupération du Nom de jeune fille
-			@VAR_PSA_LIBELLE=NMUSA,--récupération du Nom d'usage
-			@VAR_PSA_PORTABLE=NTEL2,--récupération du portable
-			@VAR_PSA_TELEPHONE=NTEL1, --récupération du fixe
-			@VAR_HRU_MODE_REGLE=MPAM1--récupération mode réglement HRU
+			@VAR_PSA_NOMJF=NMFAM,--RÃ©cupÃ©ration du Nom de jeune fille
+			@VAR_PSA_LIBELLE=NMUSA,--RÃ©cupÃ©ration du Nom d'usage
+			@VAR_PSA_PORTABLE=NTEL2,--RÃ©cupÃ©ration du portable
+			@VAR_PSA_TELEPHONE=NTEL1, --RÃ©cupÃ©ration du fixe
+			@VAR_HRU_MODE_REGLE=MPAM1--RÃ©cupÃ©ration mode rÃ©glement HRU
 			FROM INDIVIDU
 			WHERE MATRI=@VAR_CMATR; 
 
 			--Table source VALIDCONTRAT
 
 			SELECT TOP(1)
-			@VAR_ETABLISSEMENT_SALARIE=CDETS,--récupération du code établissement HRU
-			@VAR_PSA_REGIMEMAL=RGBAS,--régime SS de base
-			@VAR_PSA_REGIMESS=RGBAS,--régime SS de base
-			@VAR_PSA_REGIMEAT=RGBAS,--régime SS de base
-			@VAR_PSA_REGIMEVIP=RGBAS,--régime SS de base
-			@VAR_PSA_DATEANCIENNETE=CAST(DDANC AS datetime), --récupération dernière datetime d'ancienneté
+			@VAR_ETABLISSEMENT_SALARIE=CDETS,--rÃ©cupÃ©ration du code Ã©tablissement HRU
+			@VAR_PSA_REGIMEMAL=RGBAS,--rÃ©gime SS de base
+			@VAR_PSA_REGIMESS=RGBAS,--rÃ©gime SS de base
+			@VAR_PSA_REGIMEAT=RGBAS,--rÃ©gime SS de base
+			@VAR_PSA_REGIMEVIP=RGBAS,--rÃ©gime SS de base
+			@VAR_PSA_DATEANCIENNETE=CAST(DDANC AS datetime), --rÃ©cupÃ©ration derniÃ©re datetime d'anciennetÃ©
 			@VAR_PSA_CODEEMPLOI=CINEM,
-			@VAR_PSA_COEFFICIENT=COFFI,--récupération coefficient HRU
-			@VAR_PSA_QUALIFICATION=QUALI,--récupération qualication HRU
-			@VAR_PSA_NIVEAU=NIVEA,--récupération du niveau HRU
-			@VAR_LIBELLE_EMPLOI_SALARIE=LQUAL,--récupération libellé emploi HRU
-			@VAR_PSA_HORAIREMOIS=QHMOI,--récupération horaire mois
-			@VAR_PSA_SALAIREMOIS1=CAST(MSM AS varchar(35)),--récupération du salaire
+			@VAR_PSA_COEFFICIENT=COFFI,--rÃ©cupÃ©ration coefficient HRU
+			@VAR_PSA_QUALIFICATION=QUALI,--rÃ©cupÃ©ration qualication HRU
+			@VAR_PSA_NIVEAU=NIVEA,--rÃ©cupÃ©ration du niveau HRU
+			@VAR_LIBELLE_EMPLOI_SALARIE=LQUAL,--rÃ©cupÃ©ration libellÃ© emploi HRU
+			@VAR_PSA_HORAIREMOIS=QHMOI,--rÃ©cupÃ©ration horaire mois
+			@VAR_PSA_SALAIREMOIS1=CAST(MSM AS varchar(35)),--rÃ©cupÃ©ration du salaire
 			@VAR_TAUX_TEMPS_PARTIEL_SALARIE=APTAC,--taux temps partiel
 			@VAR_PSA_DADSCAT=CCATS,
-			@VAR_DADSPROF_TEMP=STCON --récupération du code DADS PROF
+			@VAR_DADSPROF_TEMP=STCON --rÃ©cupÃ©ration du code DADS PROF
 			FROM VALIDCONTRAT
 			WHERE MATRI=@VAR_CMATR AND CEMP=@VAR_CEMP_SALARIE
 			ORDER BY DVCTR DESC; 
@@ -255,8 +255,8 @@ ELSE --si le salarié n'est pas encore migré
 			--Table source GENCONTRAT
 			
 			SELECT TOP(1)
-			@VAR_PSA_DATEENTREE=CAST(DENTR AS datetime),--récupération dernière datetime d'entrée
-			@VAR_PSA_DATESORTIE=CAST(DDEP AS datetime),--récupération dernière datetime de sortie
+			@VAR_PSA_DATEENTREE=CAST(DENTR AS datetime),--rÃ©cupÃ©ration derniÃ©re datetime d'entrÃ©e
+			@VAR_PSA_DATESORTIE=CAST(DDEP AS datetime),--rÃ©cupÃ©ration derniÃ©re datetime de sortie
 			@VAR_CCDEP_TEST=CCDEP
 			FROM GENCONTRAT
 			WHERE MATRI=@VAR_CMATR AND CEMP=@VAR_CEMP_SALARIE
@@ -265,9 +265,9 @@ ELSE --si le salarié n'est pas encore migré
 			--Table source PERMSEJOUR
 
 			SELECT
-			@VAR_PSA_CARTESEJOUR=ETCAS,--récupération carte de séjour
-			@VAR_PSA_DATEEXPIRSEJOUR=CAST(ETFCS AS datetime),--récupération datetime fin carte de séjour
-			@VAR_PSA_DELIVRPAR=ETCCS--récupération autorité carte de séjour
+			@VAR_PSA_CARTESEJOUR=ETCAS,--rÃ©cupÃ©ration carte de sÃ©jour
+			@VAR_PSA_DATEEXPIRSEJOUR=CAST(ETFCS AS datetime),--rÃ©cupÃ©ration datetime fin carte de sÃ©jour
+			@VAR_PSA_DELIVRPAR=ETCCS--rÃ©cupÃ©ration autoritÃ© carte de sÃ©jour
 			FROM PERMSEJOUR
 			WHERE MATRI=@VAR_CMATR
 
@@ -277,10 +277,10 @@ ELSE --si le salarié n'est pas encore migré
 
 			BEGIN
 
-				SELECT @VAR_PSA_PERSACHARGE=COUNT(*) FROM ENFANTS WHERE MATRI=@VAR_CMATR; --récupération du nombre d'enfant
+				SELECT @VAR_PSA_PERSACHARGE=COUNT(*) FROM ENFANTS WHERE MATRI=@VAR_CMATR; --rÃ©cupÃ©ration du nombre d'enfant
 			END
 
-			ELSE --sinon on récupére la donnée de la table INDIVIDU
+			ELSE --sinon on rÃ©cupÃ©re la donnÃ©e de la table INDIVIDU
 
 			BEGIN
 				SELECT @VAR_PSA_PERSACHARGE=NBENF FROM INDIVIDU WHERE MATRI=@VAR_CMATR;
@@ -292,18 +292,18 @@ ELSE --si le salarié n'est pas encore migré
 												
 			--Gestion des correspondances 
 
-			--Gestion du code établissement
+			--Gestion du code Ã©tablissement
 
-			SELECT @VAR_PSA_ETABLISSEMENT=TRA_VALEURHRS FROM TRANSCO WHERE TRA_TYPE='Etablissement' AND TRA_VALEURHRU=@VAR_ETABLISSEMENT_SALARIE AND TRA_SIREN=@VAR_PSA_SIREN;--récupération code établissement HRS
+			SELECT @VAR_PSA_ETABLISSEMENT=TRA_VALEURHRS FROM TRANSCO WHERE TRA_TYPE='Etablissement' AND TRA_VALEURHRU=@VAR_ETABLISSEMENT_SALARIE AND TRA_SIREN=@VAR_PSA_SIREN;--rÃ©cupÃ©ration code Ã©tablissement HRS
 			
-			Print 'Le code établissement HRU est : '+@VAR_ETABLISSEMENT_SALARIE+' le code HRS est : '+@VAR_PSA_ETABLISSEMENT
+			Print 'Le code Ã©tablissement HRU est : '+@VAR_ETABLISSEMENT_SALARIE+' le code HRS est : '+@VAR_PSA_ETABLISSEMENT
 
 			IF @VAR_PSA_ETABLISSEMENT='' --alors anomalie
 
 			BEGIN
 
 				SET @VAR_AN_TYPE= 'Code etablissement vide'
-				SET @VAR_AN_COMMENTAIRE='Le code établissement HRU est : '+@VAR_ETABLISSEMENT_SALARIE+' le code HRS est : '+@VAR_PSA_ETABLISSEMENT
+				SET @VAR_AN_COMMENTAIRE='Le code Ã©tablissement HRU est : '+@VAR_ETABLISSEMENT_SALARIE+' le code HRS est : '+@VAR_PSA_ETABLISSEMENT
 				INSERT INTO ANOMALIES
 				VALUES (@VAR_AN_TYPE,@VAR_PSA_SALARIE,@VAR_AN_COMMENTAIRE);
 			END
@@ -313,7 +313,7 @@ ELSE --si le salarié n'est pas encore migré
 
 			SELECT @VAR_PSA_PAYSNAISSANCE=PY_PAYS FROM PAYS WHERE PY_CODEISO2=@VAR_PSA_PAYSNAISSANCE_TEMP;
 
-			--Gestion du mode de réglement
+			--Gestion du mode de rÃ©glement
 			IF @VAR_HRU_MODE_REGLE='4'
 			SET @VAR_PSA_MODEREGLE='VIR';
 			IF @VAR_HRU_MODE_REGLE='5'
@@ -325,44 +325,44 @@ ELSE --si le salarié n'est pas encore migré
 			--Gestion situation de famille
 
 			IF @VAR_SITUATIONFAMIL='M'
-				SET @VAR_PSA_SITUATIONFAMIL='MAR';--marié 
+				SET @VAR_PSA_SITUATIONFAMIL='MAR';--mariÃ© 
 			IF @VAR_SITUATIONFAMIL='C'
 				SET @VAR_PSA_SITUATIONFAMIL='CEL';--celibataire
 			IF @VAR_SITUATIONFAMIL='D'
-			SET @VAR_PSA_SITUATIONFAMIL='DIV';--divorcé
+			SET @VAR_PSA_SITUATIONFAMIL='DIV';--divorcÃ©
 			IF @VAR_SITUATIONFAMIL='K'
 			SET @VAR_PSA_SITUATIONFAMIL='90';--situation inconnue
 			IF @VAR_SITUATIONFAMIL='S'
-			SET @VAR_PSA_SITUATIONFAMIL='SEP';--séparé
+			SET @VAR_PSA_SITUATIONFAMIL='SEP';--sÃ©parÃ©
 
 			
-			--Gestion du libellé d'emploi
+			--Gestion du libellÃ© d'emploi
 
-			IF @VAR_PAR_PLE_PARTAGE='X'--si on partage les libellés d'emploi
+			IF @VAR_PAR_PLE_PARTAGE='X'--si on partage les libellÃ©s d'emploi
 			BEGIN
-				SELECT @VAR_PSA_LIBELLEEMPLOI=TRA_VALEURHRS FROM TRANSCO WHERE TRA_VALEURHRU=@VAR_LIBELLE_EMPLOI_SALARIE AND TRA_TYPE='Emploi' AND TRA_SIREN='999999999';--récupération libellé emploi transco 
+				SELECT @VAR_PSA_LIBELLEEMPLOI=TRA_VALEURHRS FROM TRANSCO WHERE TRA_VALEURHRU=@VAR_LIBELLE_EMPLOI_SALARIE AND TRA_TYPE='Emploi' AND TRA_SIREN='999999999';--rÃ©cupÃ©ration libellÃ© emploi transco 
 			END
 
 			ELSE
 			BEGIN
-				SELECT @VAR_PSA_LIBELLEEMPLOI=TRA_VALEURHRS FROM TRANSCO WHERE TRA_VALEURHRU=@VAR_LIBELLE_EMPLOI_SALARIE AND TRA_TYPE='Emploi' AND TRA_SIREN=@VAR_PSA_SIREN;--récupération libellé emploi transco 
+				SELECT @VAR_PSA_LIBELLEEMPLOI=TRA_VALEURHRS FROM TRANSCO WHERE TRA_VALEURHRU=@VAR_LIBELLE_EMPLOI_SALARIE AND TRA_TYPE='Emploi' AND TRA_SIREN=@VAR_PSA_SIREN;--rÃ©cupÃ©ration libellÃ© emploi transco 
 			END
 			
 			--Gestion de l'horaire hebdo
 
-			IF @VAR_PSA_HORAIREMOIS=151.67--si le salarié est à temps plein
+			IF @VAR_PSA_HORAIREMOIS=151.67--si le salariÃ© est Ã© temps plein
 
 			BEGIN
 				SET @VAR_PSA_HORHEBDO=35;
 			END
-			ELSE --si le salarié est à temps partiel
+			ELSE --si le salariÃ© est Ã© temps partiel
 			BEGIN
 
 			SET @VAR_PSA_HORHEBDO=@VAR_PSA_HORAIREMOIS*12/52;
 
 			END
 
-			--Gestion de la civilité
+			--Gestion de la civilitÃ©
 
 			IF @VAR_SEXE_TRANSCO='01'
 			BEGIN
@@ -388,11 +388,11 @@ ELSE --si le salarié n'est pas encore migré
 			BEGIN
 				SET @VAR_PSA_DADSPROF='01';
 			END
-			IF  @VAR_DADSPROF_TEMP='06'--si employé
+			IF  @VAR_DADSPROF_TEMP='06'--si employÃ©
 			BEGIN
 				SET @VAR_PSA_DADSPROF='02';
 			END
-			IF  @VAR_DADSPROF_TEMP='05'--si assimilé cadre
+			IF  @VAR_DADSPROF_TEMP='05'--si assimilÃ© cadre
 			BEGIN
 				SET @VAR_PSA_DADSPROF='04';--agent de maitrise
 			END
@@ -405,12 +405,12 @@ ELSE --si le salarié n'est pas encore migré
 				SET @VAR_PSA_DADSPROF='13';
 			END
 
-			IF @VAR_PSA_HORAIREMOIS=0--gestion des salariés aux forfaits jours
+			IF @VAR_PSA_HORAIREMOIS=0--gestion des salariÃ©s aux forfaits jours
 			BEGIN
 				SET @VAR_PSA_UNITETRAVAIL='03'
 			END
 
-			ELSE--cas des salariés en heures
+			ELSE--cas des salariÃ©s en heures
 			BEGIN
 				SET @VAR_PSA_UNITETRAVAIL='01';
 			END						
@@ -444,7 +444,7 @@ ELSE --si le salarié n'est pas encore migré
 				SET @VAR_PSA_MOTIFSORTIE='';
 				END
 	   
-			--Dans la table PARAMETRES on cherche la valeur associée aux zones libres
+			--Dans la table PARAMETRES on cherche la valeur associÃ©e aux zones libres
 			SELECT @VAR_PAR_CODESTAT=PAR_VALEUR FROM PARAMETRES WHERE PAR_NOM='CODESTAT';
 			SELECT @VAR_PAR_TRAVAILN1=PAR_VALEUR FROM PARAMETRES WHERE PAR_NOM='TABLETRAVAILN1';
 			SELECT @VAR_PAR_TRAVAILN2=PAR_VALEUR FROM PARAMETRES WHERE PAR_NOM='TABLETRAVAILN2';
@@ -454,25 +454,25 @@ ELSE --si le salarié n'est pas encore migré
 			SELECT @VAR_PAR_TABLE_LIBRE_PARTAGE=PAR_VALEUR FROM PARAMETRES WHERE PAR_NOM='Partage Table libre';
 			IF @VAR_PAR_TABLE_LIBRE_PARTAGE='X'--si on partage les tables libres
 			BEGIN
-				--récupération de la valeur CTA01
+				--rÃ©cupÃ©ration de la valeur CTA01
 				SELECT @VAR_CTA01_VALEUR_HRU=CTA01 FROM VALIDCONTRAT WHERE MATRI=@VAR_CMATR AND CEMP=@VAR_CEMP_SALARIE ORDER BY DVCTR DESC;
 				SELECT @VAR_CTA01_VALEUR_HRS=TRA_VALEURHRS FROM TRANSCO WHERE TRA_TYPE='CTA01' AND TRA_SIREN='999999999' AND TRA_VALEURHRU=@VAR_CTA01_VALEUR_HRU;
-				--récupération de la valeur CTA02
+				--rÃ©cupÃ©ration de la valeur CTA02
 			
 				SELECT @VAR_CTA02_VALEUR_HRU=CTA02 FROM VALIDCONTRAT WHERE MATRI=@VAR_CMATR AND CEMP=@VAR_CEMP_SALARIE ORDER BY DVCTR DESC;
 				SELECT @VAR_CTA02_VALEUR_HRS=TRA_VALEURHRS FROM TRANSCO WHERE TRA_TYPE='CTA02' AND TRA_SIREN='999999999' AND TRA_VALEURHRU=@VAR_CTA02_VALEUR_HRU;
 				
-				--récupération de la valeur CTA03
+				--rÃ©cupÃ©ration de la valeur CTA03
 			
 				SELECT @VAR_CTA03_VALEUR_HRU=CTA03 FROM VALIDCONTRAT WHERE MATRI=@VAR_CMATR AND CEMP=@VAR_CEMP_SALARIE ORDER BY DVCTR DESC;
 				SELECT @VAR_CTA03_VALEUR_HRS=TRA_VALEURHRS FROM TRANSCO WHERE TRA_TYPE='CTA03' AND TRA_SIREN='999999999' AND TRA_VALEURHRU=@VAR_CTA03_VALEUR_HRU;
 				
-				--récupération de la valeur CTA04
+				--rÃ©cupÃ©ration de la valeur CTA04
 			
 				SELECT @VAR_CTA04_VALEUR_HRU=CTA03 FROM VALIDCONTRAT WHERE MATRI=@VAR_CMATR AND CEMP=@VAR_CEMP_SALARIE ORDER BY DVCTR DESC;
 				SELECT @VAR_CTA04_VALEUR_HRS=TRA_VALEURHRS FROM TRANSCO WHERE TRA_TYPE='CTA04' AND TRA_SIREN='999999999' AND TRA_VALEURHRU=@VAR_CTA04_VALEUR_HRU;
 
-				--récupération de la valeur CTA05
+				--rÃ©cupÃ©ration de la valeur CTA05
 			
 				SELECT @VAR_CTA05_VALEUR_HRU=CTA03 FROM VALIDCONTRAT WHERE MATRI=@VAR_CMATR AND CEMP=@VAR_CEMP_SALARIE ORDER BY DVCTR DESC;
 				SELECT @VAR_CTA05_VALEUR_HRS=TRA_VALEURHRS FROM TRANSCO WHERE TRA_TYPE='CTA05' AND TRA_SIREN='999999999' AND TRA_VALEURHRU=@VAR_CTA05_VALEUR_HRU;
@@ -480,25 +480,25 @@ ELSE --si le salarié n'est pas encore migré
 			ELSE--si on ne partage pas
 
 			BEGIN
-				--récupération de la valeur CTA01
+				--rÃ©cupÃ©ration de la valeur CTA01
 
 				SELECT @VAR_CTA01_VALEUR_HRU=CTA01 FROM VALIDCONTRAT WHERE MATRI=@VAR_CMATR AND CEMP=@VAR_CEMP_SALARIE ORDER BY DVCTR DESC;
 				SELECT @VAR_CTA01_VALEUR_HRS=TRA_VALEURHRS FROM TRANSCO WHERE TRA_TYPE='CTA01' AND TRA_SIREN=@VAR_PSA_SIREN AND TRA_VALEURHRU=@VAR_CTA01_VALEUR_HRU;
-				--récupération de la valeur CTA02
+				--rÃ©cupÃ©ration de la valeur CTA02
 			
 				SELECT @VAR_CTA02_VALEUR_HRU=CTA02 FROM VALIDCONTRAT WHERE MATRI=@VAR_CMATR AND CEMP=@VAR_CEMP_SALARIE ORDER BY DVCTR DESC;
 				SELECT @VAR_CTA02_VALEUR_HRS=TRA_VALEURHRS FROM TRANSCO WHERE TRA_TYPE='CTA02' AND TRA_SIREN=@VAR_PSA_SIREN AND TRA_VALEURHRU=@VAR_CTA02_VALEUR_HRU;
-				--récupération de la valeur CTA03
+				--rÃ©cupÃ©ration de la valeur CTA03
 			
 				SELECT @VAR_CTA03_VALEUR_HRU=CTA03 FROM VALIDCONTRAT WHERE MATRI=@VAR_CMATR AND CEMP=@VAR_CEMP_SALARIE ORDER BY DVCTR DESC;
 				SELECT @VAR_CTA03_VALEUR_HRS=TRA_VALEURHRS FROM TRANSCO WHERE TRA_TYPE='CTA03' AND TRA_SIREN=@VAR_PSA_SIREN AND TRA_VALEURHRU=@VAR_CTA03_VALEUR_HRU;
 
-				--récupération de la valeur CTA04
+				--rÃ©cupÃ©ration de la valeur CTA04
 			
 				SELECT @VAR_CTA04_VALEUR_HRU=CTA04 FROM VALIDCONTRAT WHERE MATRI=@VAR_CMATR AND CEMP=@VAR_CEMP_SALARIE ORDER BY DVCTR DESC;
 				SELECT @VAR_CTA04_VALEUR_HRS=TRA_VALEURHRS FROM TRANSCO WHERE TRA_TYPE='CTA04' AND TRA_SIREN=@VAR_PSA_SIREN AND TRA_VALEURHRU=@VAR_CTA04_VALEUR_HRU;
 
-				--récupération de la valeur CTA05
+				--rÃ©cupÃ©ration de la valeur CTA05
 			
 				SELECT @VAR_CTA05_VALEUR_HRU=CTA05 FROM VALIDCONTRAT WHERE MATRI=@VAR_CMATR AND CEMP=@VAR_CEMP_SALARIE ORDER BY DVCTR DESC;
 				SELECT @VAR_CTA05_VALEUR_HRS=TRA_VALEURHRS FROM TRANSCO WHERE TRA_TYPE='CTA05' AND TRA_SIREN=@VAR_PSA_SIREN AND TRA_VALEURHRU=@VAR_CTA05_VALEUR_HRU;
@@ -521,7 +521,7 @@ ELSE --si le salarié n'est pas encore migré
 			SET @VAR_PSA_DATELIBRE3=01/01/1900;
 			SET @VAR_PSA_DATELIBRE4=01/01/1900;
 
-			--Gestion des boites à cocher
+			--Gestion des boites Ã© cocher
 
 
 			UPDATE GENCONTRAT SET GCB01='X' WHERE GCB01='O';
@@ -550,12 +550,12 @@ ELSE --si le salarié n'est pas encore migré
 			SELECT TOP(1) @VAR_GCB08=GCB08 FROM GENCONTRAT WHERE MATRI=@VAR_CMATR ORDER BY DENTR DESC;
 
 			
-			SELECT @VAR_PAR_BOITE1=PAR_VALEUR FROM PARAMETRES WHERE PAR_NOM='Boite à cocher 1';
-			SELECT @VAR_PAR_BOITE2=PAR_VALEUR FROM PARAMETRES WHERE PAR_NOM='Boite à cocher 2';
-			SELECT @VAR_PAR_BOITE3=PAR_VALEUR FROM PARAMETRES WHERE PAR_NOM='Boite à cocher 3';
-			SELECT @VAR_PAR_BOITE4=PAR_VALEUR FROM PARAMETRES WHERE PAR_NOM='Boite à cocher 4';
+			SELECT @VAR_PAR_BOITE1=PAR_VALEUR FROM PARAMETRES WHERE PAR_NOM='Boite Ã© cocher 1';
+			SELECT @VAR_PAR_BOITE2=PAR_VALEUR FROM PARAMETRES WHERE PAR_NOM='Boite Ã© cocher 2';
+			SELECT @VAR_PAR_BOITE3=PAR_VALEUR FROM PARAMETRES WHERE PAR_NOM='Boite Ã© cocher 3';
+			SELECT @VAR_PAR_BOITE4=PAR_VALEUR FROM PARAMETRES WHERE PAR_NOM='Boite Ã© cocher 4';
 
-			--boite à cocher 1
+			--boite Ã© cocher 1
 			
 			IF @VAR_PAR_BOITE1='GCB01'
 			BEGIN
@@ -589,7 +589,7 @@ ELSE --si le salarié n'est pas encore migré
 			BEGIN
 			SET @VAR_PSA_BOLLIBRE1=@VAR_GCB08;
 			END
-			--Boite à coher 2
+			--Boite Ã© coher 2
 			IF @VAR_PAR_BOITE2='GCB01'
 			BEGIN
 			SET @VAR_PSA_BOLLIBRE2=@VAR_GCB01;
@@ -623,7 +623,7 @@ ELSE --si le salarié n'est pas encore migré
 			SET @VAR_PSA_BOLLIBRE2=@VAR_GCB08;
 			END
 
-			--Boite à coher 3
+			--Boite Ã© coher 3
 			IF @VAR_PAR_BOITE3='GCB01'
 			BEGIN
 			SET @VAR_PSA_BOLLIBRE3=@VAR_GCB01;
@@ -657,7 +657,7 @@ ELSE --si le salarié n'est pas encore migré
 			SET @VAR_PSA_BOLLIBRE3=@VAR_GCB08;
 			END
 
-			--Boite à coher 4
+			--Boite Ã© coher 4
 			IF @VAR_PAR_BOITE4='GCB01'
 			BEGIN
 			SET @VAR_PSA_BOLLIBRE4=@VAR_GCB01;
@@ -696,11 +696,11 @@ ELSE --si le salarié n'est pas encore migré
 			BEGIN
 				
 				SELECT @VAR_PSA_TYPPROFILREM=PRO_PREDEFINIREM FROM PROFILS WHERE PRO_SIREN=@VAR_PSA_SIREN AND PRO_DADSPROF=@VAR_PSA_DADSPROF;
-				PRINT 'Recherche ligne niveau société = '+@VAR_PSA_TYPPROFILREM
+				PRINT 'Recherche ligne niveau sociÃ©tÃ© = '+@VAR_PSA_TYPPROFILREM
 				
-				IF @VAR_PSA_TYPPROFILREM<>'' --on récupére les valeurs sur le SIREN du salarié
+				IF @VAR_PSA_TYPPROFILREM<>'' --on rÃ©cupÃ©re les valeurs sur le SIREN du salariÃ©
 				BEGIN
-					PRINT 'Valeur niveau société'
+					PRINT 'Valeur niveau sociÃ©tÃ©'
 					
 					SELECT @VAR_PSA_PROFILREM=PRO_PROFILREM FROM PROFILS WHERE PRO_SIREN=@VAR_PSA_SIREN AND PRO_DADSPROF=@VAR_PSA_DADSPROF;
 					SELECT @VAR_PSA_PROFIL=PRO_PROFILTYPE FROM PROFILS WHERE PRO_SIREN=@VAR_PSA_SIREN AND PRO_DADSPROF=@VAR_PSA_DADSPROF;
@@ -737,7 +737,7 @@ ELSE --si le salarié n'est pas encore migré
 			IF @VAR_PAR_TRANSCOPROFIL='-' --si on doit transcoder les profils
  
 			BEGIN
-				PRINT 'Mise à blanc des codes profils'
+				PRINT 'Mise Ã© blanc des codes profils'
 				SET @VAR_PSA_PROFILREM='';
 				SET @VAR_PSA_PROFIL='';
 				SET @VAR_PSA_PROFILPRE='';
@@ -766,7 +766,7 @@ ELSE --si le salarié n'est pas encore migré
 			@VAR_PSA_REGIMEMAL,@VAR_PSA_REGIMEVIP,@VAR_PSA_REGIMEAT,@VAR_PSA_TYPDSNFRAC,@VAR_PSA_DSNFRACTION,@VAR_PSA_TYPENATTAUXPAS,@VAR_PSA_NATURETAUXPAS,@VAR_PSA_UNITETRAVAIL,@VAR_PSA_MOTIFSORTIE,@VAR_PSA_HORHEBDO,@VAR_PSA_ETATBULLETIN,@VAR_NOM_TABLE,@VAR_PSA_PROFILREM,@VAR_PSA_PROFIL,@VAR_PSA_PROFILPRE,
 			@VAR_PSA_PROFILMUT,@VAR_PSA_TYPPROFIL,@VAR_PSA_TYPPROFILMUT,@VAR_PSA_TYPPROFILPRE,@VAR_PSA_TYPPROFILREM);
 
-			UPDATE VENTILATION_INDIVIDUS SET IND_STATUS='Etape Salaries', IND_REPRISE_HR_SPRINT_SALARIE='X' WHERE IND_MATRICULEHRU=@VAR_CMATR AND IND_CEMP=@VAR_CEMP_SALARIE; --mise à jour du statuts
+			UPDATE VENTILATION_INDIVIDUS SET IND_STATUS='Etape Salaries', IND_REPRISE_HR_SPRINT_SALARIE='X' WHERE IND_MATRICULEHRU=@VAR_CMATR AND IND_CEMP=@VAR_CEMP_SALARIE; --mise Ã© jour du statuts
 			
 			--alimentation de la table des TIERS
 
@@ -864,16 +864,16 @@ ELSE --si le salarié n'est pas encore migré
 	END
 END
 
---RAZ du compteur salarié pour recommencer
+--RAZ du compteur salariÃ© pour recommencer
 GO
 
---Gestion des Noms de jeune fille attention sur HR SPRINT le champ PSA_NOMJF doit etre vide pour les hommes et le champ PSA_LIBELLE ne peut pas etre à NULL
+--Gestion des Noms de jeune fille attention sur HR SPRINT le champ PSA_NOMJF doit etre vide pour les hommes et le champ PSA_LIBELLE ne peut pas etre Ã© NULL
 
 UPDATE HR_SPRINT_SALARIES SET PSA_LIBELLE=PSA_NOMJF WHERE PSA_SEXE='M';--recopie les noms de jeune fille sur le champ nom d'usage pour les hommes
 UPDATE HR_SPRINT_SALARIES SET PSA_NOMJF='' WHERE PSA_SEXE='M';--RAZ du champ nom de jeune fille pour les hommes
 UPDATE HR_SPRINT_SALARIES SET PSA_LIBELLE=PSA_NOMJF WHERE PSA_SEXE='F' AND PSA_LIBELLE='';--on recopie les noms de de jeune fille sur le champ nom d'usage pour les femmes
-UPDATE HR_SPRINT_SALARIES SET PSA_HORAIREMOIS=0, PSA_HORHEBDO=0 WHERE PSA_HORAIREMOIS IS NULL --suppression des valeurs à NULL
+UPDATE HR_SPRINT_SALARIES SET PSA_HORAIREMOIS=0, PSA_HORHEBDO=0 WHERE PSA_HORAIREMOIS IS NULL --suppression des valeurs Ã© NULL
 
 GO
 
-Print 'Fin reprise des salariés'
+Print 'Fin reprise des salariÃ©s'
