@@ -1,5 +1,5 @@
 
---Création base Reprise
+--CrÃ©ation base Reprise
 
 USE master;  
 GO  
@@ -18,13 +18,13 @@ LOG ON
     MAXSIZE = 2500MB,  
     FILEGROWTH = 5MB );
 
-Print 'Création base REPRISE_HRU '
+Print 'CrÃ©ation base REPRISE_HRU '
 
 GO  
 
 USE REPRISE_HRU 
 
---Création des tables HR SPRINT
+--CrÃ©ation des tables HR SPRINT
 
 --Table SALARIES
 
@@ -126,7 +126,7 @@ PSA_TYPPROFILREM char(3),
 
 );
 
-PRINT 'Création table SALARIES'
+PRINT 'CrÃ©ation table SALARIES'
 
 GO
 
@@ -142,7 +142,7 @@ PSE_EMAILPROF varchar(35)
 
 );
 
-PRINT 'Création table DEPORTSAL'
+PRINT 'CrÃ©ation table DEPORTSAL'
 
 GO
 
@@ -158,7 +158,7 @@ PSZ_DIGITALIDENT varchar(50),
 );
 
 
-PRINT 'Création table SALARIECOMPL'
+PRINT 'CrÃ©ation table SALARIECOMPL'
 
 GO
 
@@ -196,7 +196,7 @@ CONTRATTRAVAIL varchar(14),
 PCI_DATEANCSIRET date,
 PCI_STATUTBOETH char(1)
 );
-PRINT 'Création table CONTRATRAVAIL'
+PRINT 'CrÃ©ation table CONTRATRAVAIL'
 GO
 
 --TIERS
@@ -216,7 +216,7 @@ T_VILLE varchar(35)
 
 );
 
-PRINT 'Création table TIERS'
+PRINT 'CrÃ©ation table TIERS'
 GO
 
 --RIB
@@ -243,7 +243,7 @@ R_DEVISE char(3)
 );
 
 
-PRINT 'Création table RIB'
+PRINT 'CrÃ©ation table RIB'
 
 GO
 
@@ -279,7 +279,7 @@ IND_REPRISE_HR_SPRINT_PGHISTODETAIL char(1)
 
 GO
 
-PRINT 'Création table VENTILATION_INDIVIDUS'
+PRINT 'CrÃ©ation table VENTILATION_INDIVIDUS'
 
 
 CREATE TABLE JOURNAL_DES_TRAITEMENTS
@@ -294,7 +294,7 @@ JOU_COMMENTAIRE varchar(255)
 );
 GO
 
-PRINT 'Création table JOURNAL_DES_TRAITEMENTS'
+PRINT 'CrÃ©ation table JOURNAL_DES_TRAITEMENTS'
 
 
 CREATE TABLE ANOMALIES
@@ -309,7 +309,7 @@ AN_COMMENTAIRE varchar(255)
 )
 GO
 
-PRINT 'Création table ANOMALIES'
+PRINT 'CrÃ©ation table ANOMALIES'
 
 
 
@@ -324,7 +324,7 @@ TRAV1_MATRICULEHRS varchar(10),
 
 GO
 
-PRINT 'Création table TRAVAIL_RENUMEROTATION_MATRICULE'
+PRINT 'CrÃ©ation table TRAVAIL_RENUMEROTATION_MATRICULE'
 
 
 CREATE TABLE TRANSCO
@@ -338,7 +338,7 @@ TRA_SIREN varchar(35),
 );
 GO
 
-PRINT 'Création table TRANSCO'
+PRINT 'CrÃ©ation table TRANSCO'
 
 
 CREATE TABLE HR_SPRINT_CHOIXCOD
@@ -353,7 +353,7 @@ CC_ABREGE varchar(35)
 
 Go
 
-PRINT 'Création table HR_SPRINT_CHOIXCOD'
+PRINT 'CrÃ©ation table HR_SPRINT_CHOIXCOD'
 
 CREATE TABLE PARAMETRES
 (
@@ -366,15 +366,15 @@ PAR_COMMENTAIRES varchar(255)
 
 GO
 
-PRINT 'Création table PARAMETRES'
+PRINT 'CrÃ©ation table PARAMETRES'
 
 INSERT INTO PARAMETRES
 
 VALUES 
 
-('AUXI_LONGUEUR','10','La valeur est utilisée pour générer les comptes auxiliaires sur la bonne longueur'),
-('GEN_421','421000','La valeur est utilisée pour alimenter la table TIERS. Indiquer le compte de Net à payer'),
-('AUXI_PREFIXE','S','SAL par default indiquer le préfixe pour des codes auxiliaires'),
+('AUXI_LONGUEUR','10','La valeur est utilisÃ©e pour gÃ©nÃ©rer les comptes auxiliaires sur la bonne longueur'),
+('GEN_421','421000','La valeur est utilisÃ©e pour alimenter la table TIERS. Indiquer le compte de Net Ã© payer'),
+('AUXI_PREFIXE','S','SAL par default indiquer le prÃ©fixe pour des codes auxiliaires'),
 ('TABLETRAVAILN1','CTA02','Indiquer le nom de la colonne HRU'),
 ('TABLETRAVAILN2','-','Indiquer le nom de la colonne HRU'),
 ('TABLETRAVAILN3','-','Indiquer le nom de la colonne HRU'),
@@ -383,23 +383,23 @@ VALUES
 ('TABLETTELIBRE1','-','Indiquer le nom de la colonne HRU'),
 ('TABLETTELIBRE2','-','Indiquer le nom de la colonne HRU'),
 ('TABLETTELIBRE4','-','Indiquer le nom de la colonne HRU'),
-('Boite à cocher 1','GCB06','Indiquer le nom de la colonne HRU'),
-('Boite à cocher 2','GCB02','Indiquer le nom de la colonne HRU'),
-('Boite à cocher 3','GCB01','Indiquer le nom de la colonne HRU'),
-('Boite à cocher 4','-','Indiquer le nom de la colonne HRU'),
+('Boite Ã  cocher 1','GCB06','Indiquer le nom de la colonne HRU'),
+('Boite Ã  cocher 2','GCB02','Indiquer le nom de la colonne HRU'),
+('Boite Ã  cocher 3','GCB01','Indiquer le nom de la colonne HRU'),
+('Boite Ã  cocher 4','-','Indiquer le nom de la colonne HRU'),
 ('MULTI_AXE','X','Indiquer X si multi axes dans FRH sinon -'),
-('AXE_1','8','Indiquer la longueur de l’axe'),
-('AXE_2','2','Indiquer la longueur de l’axe'),
-('AXE_3','3','Indiquer la longueur de l’axe'),
-('AXE_4','-','Indiquer la longueur de l’axe'),
-('AXE_5','-','Indiquer la longueur de l’axe'),
-('Renumérotation matricules','-','Indiquer X pour renuméroter les salariés. Attention la renumérotation se fera avec 10 positions en numérique
-Concaténation 00000+ Code CEMP de HRU + incrémentation automatique'),
+('AXE_1','8','Indiquer la longueur de l axe'),
+('AXE_2','2','Indiquer la longueur de l axe'),
+('AXE_3','3','Indiquer la longueur de l axe'),
+('AXE_4','-','Indiquer la longueur de l axe'),
+('AXE_5','-','Indiquer la longueur de l axe'),
+('RenumÃ©rotation matricules','-','Indiquer X pour renumÃ©roter les salariÃ©s. Attention la renumÃ©rotation se fera avec 10 positions en numÃ©rique
+ConcatÃ©nation 00000+ Code CEMP de HRU + incrÃ©mentation automatique'),
 ('Reprise bulletins','-','Indiquer X pour reprendre les bulletins sinon -'),
-('Partage PLE','X','Indiquer X si partage des libellés emplois'),
+('Partage PLE','X','Indiquer X si partage des libellÃ©s emplois'),
 ('Reprise Taux Pas','-','Indiquer X pour reprendre les taux PAS'),
 ('Partage Table libre','X','Indiquer X si partage zones libres'),
-('Date de démarrage' ,'01/01/2020','Indiquer la date de démarrage du dossier format JJ/MM/AAAA'),
+('Date de dÃ©marrage' ,'01/01/2020','Indiquer la date de dÃ©marrage du dossier format JJ/MM/AAAA'),
 ('CET ACQUIS','B1','Indiquer le cumul de CET acquis'),
 ('CET PRIS','B2','Indiquer le cumul de CET pris'),
 ('RTT ACQUIS','','Indiquer le cumul de RTT acquis'),
@@ -459,7 +459,7 @@ PPU_CIVILITE char(3),
 
 GO
 
-PRINT 'Création table HR_SPRINT_PAIEENCOURS'
+PRINT 'CrÃ©ation table HR_SPRINT_PAIEENCOURS'
 
 
 CREATE TABLE HR_SPRINT_HISTOBULLETIN
@@ -498,7 +498,7 @@ PHB_LIBREPCMB4 char(3),
 
 GO
 
-PRINT 'Création table HR_SPRINT_HISTOBULLETIN'
+PRINT 'CrÃ©ation table HR_SPRINT_HISTOBULLETIN'
 
 
 
@@ -527,7 +527,7 @@ PHC_LIBREPCMB4 char(3),
 
 GO
 
-PRINT 'Création table HR_SPRINT_HISTOCUMSAL'
+PRINT 'CrÃ©ation table HR_SPRINT_HISTOCUMSAL'
 
 CREATE TABLE HR_SPRINT_MINIMUMCONVENT
 
@@ -547,7 +547,7 @@ MINIMUMCONVENT char(14)
 
 GO
 
-PRINT 'Création table HR_SPRINT_MINIMUMCONVENT'
+PRINT 'CrÃ©ation table HR_SPRINT_MINIMUMCONVENT'
 
 
 CREATE TABLE HR_SPRINT_PASTAUX
@@ -567,7 +567,7 @@ PKT_TAUXDGFIP varchar(5),
 
 GO
 
-PRINT 'Création table HR_SPRINT_PASTAUX'
+PRINT 'CrÃ©ation table HR_SPRINT_PASTAUX'
 
 
 CREATE TABLE HR_SPRINT_ENFANTSALARIE
@@ -586,7 +586,7 @@ PEF_TYPEPARENTAL char(3),
 
 GO
 
-PRINT 'Création table HR_SPRINT_ENFANTSALARIE'
+PRINT 'CrÃ©ation table HR_SPRINT_ENFANTSALARIE'
 
 CREATE TABLE HR_SPRINT_ABSENCESALARIE
 (
@@ -623,7 +623,7 @@ PCN_GUID varchar(36)
 
 Go
 
-PRINT 'Création table HR_SPRINT_ABSENCESALARIE'
+PRINT 'CrÃ©ation table HR_SPRINT_ABSENCESALARIE'
 
 
 CREATE TABLE HR_SPRINT_ETABLISS
@@ -647,7 +647,7 @@ ET_APE char(5),
 
 GO
 
-PRINT 'Création table HR_SPRINT_ETABLISS'
+PRINT 'CrÃ©ation table HR_SPRINT_ETABLISS'
 
 
 CREATE TABLE HR_SPRINT_PGHISTODETAIL
@@ -672,7 +672,7 @@ PHD_CONTRATTRAV char(1)
 );
 GO
 
-PRINT 'Création table HR_SPRINT_PGHISTODETAIL'
+PRINT 'CrÃ©ation table HR_SPRINT_PGHISTODETAIL'
 
 
 CREATE TABLE HR_SPRINT_CVENTIL
@@ -699,7 +699,7 @@ CVE_TYPE char(3)
 
 GO
 
-PRINT 'Création table HR_SPRINT_CVENTIL'
+PRINT 'CrÃ©ation table HR_SPRINT_CVENTIL'
 
 
 
@@ -717,7 +717,7 @@ CSP_LIBELLE varchar(35)
 );
 GO
 
-PRINT 'Création table HR_SPRINT_CSECTION'
+PRINT 'CrÃ©ation table HR_SPRINT_CSECTION'
 
 
 --Table CONVENTIONCOLL
@@ -735,7 +735,7 @@ PCV_IDCC varchar(17)
 
 GO
 
-PRINT 'Création table HR_SPRINT_CONVENTIONCOLL'
+PRINT 'CrÃ©ation table HR_SPRINT_CONVENTIONCOLL'
 
 
 CREATE TABLE HR_SPRINT_AXE
@@ -762,7 +762,7 @@ X_SAISIETRANCHE char(1)
 );
 GO
 
-PRINT 'Création table HR_SPRINT_AXE'
+PRINT 'CrÃ©ation table HR_SPRINT_AXE'
 
 
 CREATE TABLE CORRESPONDANCE_HRU_HRS
@@ -778,7 +778,7 @@ COR_VALEURHRS_COMMENTAIRE varchar(255),
 
 GO
 
-PRINT 'Création table CORRESPONDANCE_HRU_HRS'
+PRINT 'CrÃ©ation table CORRESPONDANCE_HRU_HRS'
 
 
 INSERT INTO CORRESPONDANCE_HRU_HRS
@@ -797,7 +797,7 @@ VAL_UTILISER char(1),
 VAL_LIGNE  INT IDENTITY
 );
 
-PRINT 'Création table VALEUR_POSSIBLE_CCN'
+PRINT 'CrÃ©ation table VALEUR_POSSIBLE_CCN'
 
 
 
@@ -830,7 +830,7 @@ VEN_NUMEROVENTILATION int
 
 GO
 
-PRINT 'Création table HR_SPRINT_REPRISEVENTILATIONANALYTIQUE'
+PRINT 'CrÃ©ation table HR_SPRINT_REPRISEVENTILATIONANALYTIQUE'
 
 
 CREATE TABLE HR_SPRINT_RETENUESALAIRE
@@ -852,7 +852,7 @@ PRE_NBMOIS int
 );
 GO
 
-PRINT 'Création table HR_SPRINT_RETENUESALAIRE'
+PRINT 'CrÃ©ation table HR_SPRINT_RETENUESALAIRE'
 
 CREATE TABLE STATISTIQUES
 
@@ -864,7 +864,7 @@ STA_NBRE_LIGNES int
 
 );
 
-PRINT 'Création table STATISTIQUES'
+PRINT 'CrÃ©ation table STATISTIQUES'
 
 GO
 
@@ -891,7 +891,7 @@ GO
 INSERT INTO PROFILS
 VALUES
 ('999999999','Ouvrier','01','ETB','101','ETB','001','ETB','M01','ETB','401'),
-('999999999','Employé','02','ETB','101','ETB','001','ETB','M01','ETB','401'),
+('999999999','EmployÃ©','02','ETB','101','ETB','001','ETB','M01','ETB','401'),
 ('999999999','Cadre article 4','29','PER','103','PER','003','ETB','M01','ETB','403'),
 ('999999999','Agent de maitrise','04','ETB','10A','ETB','00A','ETB','M01','ETB','401');
 
