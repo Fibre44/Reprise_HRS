@@ -1,8 +1,19 @@
 @echo off
-set /p user=Saisir le login SQL : 
+:connexion
+set /p user=Saisir le login SQL :
 set /p password=Saisir le password SQL : 
-set /p server=Saisir le nom du serveur SQL : 
+set /p server=Saisir l'IP du serveur SQL : 
 set /p database=Saisir le nom de la base :
+echo Tentative de connexion
+sqlcmd -b -S %server% -U %user% -P %password% -d %database% -q exit
+if not errorlevel 1 (
+    echo connexion SQL ok
+    goto etape
+)
+::si erreur else donne une erreur dans la console
+echo erreur de connexion au serveur SQL
+goto connexion
+:etape
 set /p qexport=Souhaitez aller directement à l'export ? [1/0] :
 if %qexport%==1 goto debutexport
 set /p razhru=Souhaitez vous faire RAZ des tables HRU ? [1/0] :
@@ -48,11 +59,59 @@ set /p matricule=Souhaitez vous reprendre les matricules + CEMP avec recodificat
 if %matricule%==2 goto compta
 set /p matricule=Souhaitez vous reprendre les matricules + CEMP + recodification ? [3/0] :
 ::mode de reprise 3
-if %matricule%==3 
+if %matricule%==3 goto compta
 :compta
 set /p longueur_auxiliaire=Longueur des comptes auxiliaires ?
 set /p prefixe_auxiliaire=Prefixe auxiliaire ?
-::import paramétres
+set /p utilisationanalytique=Utilisez vous l'analytique ?[1/0]
+if %utilisationanalytique%==0 goto zonelibre
+set /p axe1=Longueur axe 1 ?
+set /p axe2=Longueur axe 2 ?
+set /p axe3=Longueur axe 3 ?
+set /p axe4=Longueur axe 4 ?
+set /p axe5=Longueur axe 5 ?
+if %utilisationanalytique%==1 goto zonelibre
+set axe1=""
+set axe2=""
+set axe3=""
+set axe4=""
+set axe5=""
+:zonelibre
+set /p zonelibre=Utilisez vous les zones libres ? [1/0]
+if %zonelibre%==0 goto divers
+set codestat="CTA01"
+set travailN1="CTA02"
+set travailN2="CTA03"
+set travailN3="CTA04"
+set travailN4="CTA05"
+set boite1="GCB1"
+set boite2="GCB2"
+set boite3="GCB3"
+set boite4="GCB4"
+:divers
+set /p bulletin=Reprenez vous les bulletins ?[1/0]
+if %bulletin%==1 (
+    set bulletin="X"
+)
+if %bulletin%==0 (
+    set bulletin="-" 
+)
+set /p partageemploi=Partagez vous les codes emplois ?[1/0]
+if %partageemploi%==1 (
+    set partageemploi="X"
+)
+if %partageemploi%==0 (
+    set partageemploi="-" 
+)
+set /p partagezonlibre=Partagez vous les zones libres ?[1/0]
+if %partagezonlibre%==1 (
+    set partagezonlibre="X"
+)
+if %partagezonlibre%==0 (
+    set partagezonlibre="-" 
+)
+echo Lancement import des paramétres
+:import_param
 sqlcmd -S %server% -U %user% -P %password% -d %database% -i .\script\Import_param.sql
 echo Import des paramétres
 echo Reprise en cours veuillez patienter
