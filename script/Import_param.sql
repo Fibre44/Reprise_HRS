@@ -5,11 +5,9 @@ GO
 
 CREATE TABLE PARAMETRES
 (
-
-PAR_NOM varchar(35),
-PAR_VALEUR varchar(35),
-PAR_COMMENTAIRES varchar(255)
-
+    PAR_NOM varchar(35),
+    PAR_VALEUR varchar(35),
+    PAR_COMMENTAIRES varchar(255)
 );
 !!:GO  
 GO
@@ -29,7 +27,7 @@ GO
 
 INSERT INTO PARAMETRES VALUES
 ('AUXI_PREFIXE','S','Prefixe auxiliaire'),
-('GEN_421','421000','La valeur est utilisée pour alimenter la table TIERS. Indiquer le compte de Net é payer'),
+('GEN_421','421000','La valeur est utilisée pour alimenter la table TIERS. Indiquer le compte de Net à payer'),
 ('TABLETRAVAILN1',$(travailN1),'Indiquer le nom de la colonne HRU'),
 ('TABLETRAVAILN2',$(travailN2),'Indiquer le nom de la colonne HRU'),
 ('TABLETRAVAILN3',$(travailN3),'Indiquer le nom de la colonne HRU'),

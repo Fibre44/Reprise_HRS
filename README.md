@@ -43,8 +43,4 @@
 # Procédure
 
 - Exporter les données depuis Synapps
-- Compléter le fichier de paramétrage pour la migration HRS
-- Placer les fichiers csv de HRU dans le répértoire sources_hru + le fichier de paramétrage
-- Lancer le script d'import (les fichiers dtsx ne sont pas sur github)
-- Lancer le script de reprise
-- Lancer le script d'export
+- Lancer l'assistant : Assistant_migration.cmd
