@@ -127,7 +127,11 @@
     echo Reprise en cours veuillez patienter
     sqlcmd -S %server% -U %user% -P %password% -d %database% -i .\script\Reprise_CCN.sql -i .\script\Reprise_VENTILATIONINDIVIDUS.sql -i .\script\Reprise_CLASSIFICATIONS.sql -i .\script\Reprise_CHOIXCOD_MINIMUMCONVENT.sql -i .\script\Reprise_ETABLISSEMENTS.sql -i .\script\Reprise_SALARIES.sql -i .\script\Reprise_CONTRATTRAVAIL.sql -i .\script\Reprise_DEPORTSAL_SALARIECOMPL.sql -i .\script\Reprise_ENFANTSALARIE.sql -i .\script\Reprise_PGHISTODETAIL.sql -i .\script\Reprise_RIB.sql -i .\script\Reprise_ANALYTIQUE.sql -i .\script\Reprise_TAUXPAS.sql -i .\script\Reprise_RETENUESALARIE.sql -i .\script\Reprise_ABSENCESALARIE.sql -i .\script\Reprise_BULLETINS.sql -i .\script\Reprise_STAT.sql -o .\logs\logs.txt
     echo Fin de la reprise
+    echo Liste des anomalies
+    sqlcmd -b -S %server% -U %user% -P %password% -d %database% -Q "SELECT AN_MATRICULE,AN_COMMENTAIRE FROM ANOMALIES"
 :debutexport
+    echo Liste des SIREN
+    sqlcmd -b -S %server% -U %user% -P %password% -d %database% -Q "SELECT [Raison Sociale],Siren FROM EMPLOYEUR"
     set COLONNE1='='
     set COLONNE2='1'
     set /p SIREN=Taper le SIREN à exporter :
@@ -135,16 +139,20 @@
     ::Controler que le SIREN existe sinon le script crash
     sqlcmd -S %server% -U %user% -P %password% -d %database% -i .\script\Export.sql -s "|" -W -h -1
     mkdir .\fichiers_hrs\%SIREN%
-    COPY .\Entete\SALARIES_EN_TETE.asc + .\fichiers_hrs\SALARIES.asc .\fichiers_hrs\%SIREN%\%SIREN%_SALARIES.asc
-    COPY .\Entete\CONTRATTRAVAIL_EN_TETE.asc + .\fichiers_hrs\CONTRATTRAVAIL.asc .\fichiers_hrs\%SIREN%\%SIREN%_CONTRATTRAVAIL.asc
-    COPY .\Entete\RIB_EN_TETE.asc + .\fichiers_hrs\RIB.asc .\fichiers_hrs\%SIREN%\%SIREN%_RIB.asc
-    COPY .\Entete\DEPORTSAL_EN_TETE.asc + .\fichiers_hrs\DEPORTSAL.asc .\fichiers_hrs\%SIREN%\%SIREN%_DEPORTSAL.asc
-    COPY .\Entete\SALARIESCOMPL_EN_TETE.asc + .\fichiers_hrs\SALARIESCOMPL.asc .\fichiers_hrs\%SIREN%\%SIREN%_SALARIESCOMPL.asc 
-    COPY .\Entete\ENFANTSALARIE_EN_TETE.asc + .\fichiers_hrs\ENFANTSALARIE.asc .\fichiers_hrs\%SIREN%\%SIREN%_ENFANTSALARIE.asc
-    COPY .\Entete\RETENUESALARIE_EN_TETE.asc + .\fichiers_hrs\RETENUESALARIE.asc .\fichiers_hrs\%SIREN%\%SIREN%_RETENUESALARIE.asc
-    COPY .\Entete\ABSENCESALARIE_EN_TETE.asc + .\fichiers_hrs\ABSENCESALARIE.asc .\fichiers_hrs\%SIREN%\%SIREN%_ABSENCESALARIE.asc
-    COPY .\Entete\CHOIXCOD_EN_TETE.asc + .\fichiers_hrs\CHOIXCOD.asc .\fichiers_hrs\%SIREN%\%SIREN%_CHOIXCOD.asc
-    COPY .\Entete\HISTOCUMSAL_EN_TETE.asc + .\fichiers_hrs\HISTOCUMSAL.asc .\fichiers_hrs\%SIREN%\%SIREN%_HISTOCUMSAL.asc
+    copy .\Entete\SALARIES_EN_TETE.asc + .\temp\SALARIES.asc .\fichiers_hrs\%SIREN%\%SIREN%_SALARIES.asc
+    copy .\Entete\CONTRATTRAVAIL_EN_TETE.asc + .\temp\CONTRATTRAVAIL.asc .\fichiers_hrs\%SIREN%\%SIREN%_CONTRATTRAVAIL.asc
+    copy .\Entete\RIB_EN_TETE.asc + .\temp\RIB.asc .\fichiers_hrs\%SIREN%\%SIREN%_RIB.asc
+    copy .\Entete\DEPORTSAL_EN_TETE.asc + .\temp\DEPORTSAL.asc .\fichiers_hrs\%SIREN%\%SIREN%_DEPORTSAL.asc
+    copy .\Entete\SALARIESCOMPL_EN_TETE.asc + .\temp\SALARIESCOMPL.asc .\fichiers_hrs\%SIREN%\%SIREN%_SALARIESCOMPL.asc 
+    copy .\Entete\ENFANTSALARIE_EN_TETE.asc + .\temp\ENFANTSALARIE.asc .\fichiers_hrs\%SIREN%\%SIREN%_ENFANTSALARIE.asc
+    copy .\Entete\RETENUESALARIE_EN_TETE.asc + .\temp\RETENUESALARIE.asc .\fichiers_hrs\%SIREN%\%SIREN%_RETENUESALARIE.asc
+    copy .\Entete\ABSENCESALARIE_EN_TETE.asc + .\temp\ABSENCESALARIE.asc .\fichiers_hrs\%SIREN%\%SIREN%_ABSENCESALARIE.asc
+    copy .\Entete\CHOIXCOD_EN_TETE.asc + .\temp\CHOIXCOD.asc .\fichiers_hrs\%SIREN%\%SIREN%_CHOIXCOD.asc
+    copy .\Entete\HISTOCUMSAL_EN_TETE.asc + .\temp\HISTOCUMSAL.asc .\fichiers_hrs\%SIREN%\%SIREN%_HISTOCUMSAL.asc
+    cd .\temp
+    echo ouverture dossier temp
+    del *.asc
+    echo Suppresion des fichiers temporaires
     echo Fin d'export
     :: ajouter une sortie de boucle
     set /p export=Pour exporter un autre SIREN taper 1 :
