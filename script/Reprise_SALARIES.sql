@@ -413,7 +413,9 @@ ELSE --si le salarié n'est pas encore migré
 			ELSE--cas des salariés en heures
 			BEGIN
 				SET @VAR_PSA_UNITETRAVAIL='01';
-			END						
+			END
+
+			SELECT @VAR_PSA_ETATBULLETIN=PAR_VALEUR FROM PARAMETRES WHERE PAR_NOM='CODE_BULLETIN';--code de la trame bulletin de paie
 
 			--Activation des valeurs par default
 			SET @VAR_PSA_UNITEPRISEFF=1;
@@ -422,8 +424,7 @@ ELSE --si le salarié n'est pas encore migré
 			SET @VAR_PSA_CONGESPAYES='X';
 			SET @VAR_PSA_SALAIREMOIS2='';
 			SET @VAR_PSA_SALAIREMOIS3='';
-			SET @VAR_PSA_SALAIREMOIS4='';	
-			SET @VAR_PSA_ETATBULLETIN='PBG';			
+			SET @VAR_PSA_SALAIREMOIS4='';
 			SET @VAR_PSA_ORDREAT='1';
 			SET @VAR_PSA_TYPDSNFRAC='ETB'
 			SET @VAR_PSA_DSNFRACTION='1'; 
