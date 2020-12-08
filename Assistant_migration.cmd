@@ -135,10 +135,41 @@
 :import_param
     sqlcmd -S %server% -U %user% -P %password% -d %database% -i .\script\Import_param.sql
     echo Import des paramétres
-    echo Reprise en cours veuillez patienter le traitement peut etre long 15 à 30 minutes
-    sqlcmd -S %server% -U %user% -P %password% -d %database% -i .\script\Reprise_CCN.sql -i .\script\Reprise_VENTILATIONINDIVIDUS.sql -i .\script\Reprise_CLASSIFICATIONS.sql -i .\script\Reprise_CHOIXCOD_MINIMUMCONVENT.sql -i .\script\Reprise_ETABLISSEMENTS.sql -i .\script\Reprise_SALARIES.sql -i .\script\Reprise_CONTRATTRAVAIL.sql -i .\script\Reprise_DEPORTSAL_SALARIECOMPL.sql -i .\script\Reprise_ENFANTSALARIE.sql -i .\script\Reprise_PGHISTODETAIL.sql -i .\script\Reprise_RIB.sql -i .\script\Reprise_ANALYTIQUE.sql -i .\script\Reprise_TAUXPAS.sql -i .\script\Reprise_RETENUESALARIE.sql -i .\script\Reprise_ABSENCESALARIE.sql -i .\script\Reprise_BULLETINS.sql -i .\script\Reprise_STAT.sql -o .\logs\logs.txt
-    echo Fin de la reprise
-    echo Liste des anomalies
+    echo Reprise en cours veuillez patienter le traitement peut etre long 15 à 30 minutes heure de début %time%
+    sqlcmd -S %server% -U %user% -P %password% -d %database% -i .\script\Reprise_CCN.sql -o .\logs\logs_ccn.txt
+    echo Traitement ccn %time%
+     sqlcmd -S %server% -U %user% -P %password% -d %database% -i .\script\Reprise_VENTILATIONINDIVIDUS.sql -o .\logs\logs_ventilations.txt
+    echo Traitement ventilation salariés %time%
+    sqlcmd -S %server% -U %user% -P %password% -d %database% -i .\script\Reprise_CLASSIFICATIONS.sql -o .\logs\logs_classifications.txt
+    sqlcmd -S %server% -U %user% -P %password% -d %database% -i .\script\Reprise_CHOIXCOD_MINIMUMCONVENT.sql -o .\logs\logs_choixcod.txt
+    echo Traitement classifications %time%
+    sqlcmd -S %server% -U %user% -P %password% -d %database% -i .\script\Reprise_ETABLISSEMENTS.sql -o .\logs\logs_etablissements.txt
+    echo Traitement etablissements %time%
+    sqlcmd -S %server% -U %user% -P %password% -d %database% -i .\script\Reprise_SALARIES.sql -o .\logs\logs_salaries.txt
+    echo Traitement salaries %time%
+    sqlcmd -S %server% -U %user% -P %password% -d %database% -i .\script\Reprise_CONTRATTRAVAIL.sql -o .\logs\logs_contrats.txt
+    echo Traitement contrats travails %time%
+    sqlcmd -S %server% -U %user% -P %password% -d %database% -i .\script\Reprise_DEPORTSAL_SALARIECOMPL.sql -o .\logs\logs_salariescompldeportsal.txt
+    echo Traitement salariescompl+deportsal %time%
+    sqlcmd -S %server% -U %user% -P %password% -d %database% -i .\script\Reprise_ENFANTSALARIE.sql -o .\logs\logs_enfants.txt
+    echo Traitement enfants %time%
+    sqlcmd -S %server% -U %user% -P %password% -d %database% -i .\script\Reprise_PGHISTODETAIL.sql -o .\logs\logs_pghistodetail.txt
+    echo Traitement PGHISTODETAIL %time%
+    sqlcmd -S %server% -U %user% -P %password% -d %database% -i .\script\Reprise_RIB.sql -o .\logs\logs_rib.txt
+    echo Traitement RIB %time%
+    sqlcmd -S %server% -U %user% -P %password% -d %database% -i .\script\Reprise_ANALYTIQUE.sql -o .\logs\logs_analytique.txt
+    echo Traitement Analytique %time%
+    sqlcmd -S %server% -U %user% -P %password% -d %database% -i .\script\Reprise_TAUXPAS.sql -o .\logs\logs_tauxpas.txt
+    echo Traitement TAUXPAS %time%
+    sqlcmd -S %server% -U %user% -P %password% -d %database% -i .\script\Reprise_RETENUESALARIE.sql -o .\logs\logs_retenue.txt
+    echo Traitement saisie arret %time%
+    sqlcmd -S %server% -U %user% -P %password% -d %database% -i.\script\Reprise_ABSENCESALARIE.sql -o .\logs\logs_absence.txt
+    echo Traitement absences+CP %time%
+    sqlcmd -S %server% -U %user% -P %password% -d %database% -i .\script\Reprise_BULLETINS.sql -o .\logs\logs_bulletin.txt
+    echo Traitement bulletins %time%
+    sqlcmd -S %server% -U %user% -P %password% -d %database% -i .\script\Reprise_STAT.sql
+    echo Fin de la reprise à %time%
+    echo Liste des anomalies 
     sqlcmd -b -S %server% -U %user% -P %password% -d %database% -Q "SELECT AN_MATRICULE,AN_COMMENTAIRE FROM ANOMALIES"
 :debutexport
     echo Liste des SIREN
