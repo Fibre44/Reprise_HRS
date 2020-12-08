@@ -123,7 +123,14 @@
     set /p codebulletinpaie=Si vous utilisez un code bulletin différent de PBG veuillez l'indiquer sinon 0 :
     if %codebulletinpaie%==0 (
         set codebulletinpaie="PBG"
-    )    
+    )
+    set /p cp=Utilisez vous des CP ouvrés ?[1/0]
+    if %cp%==1 (
+        set cp="2,08"
+    )
+    if %cp%==0 (
+        set cp="2,50"
+    )         
     echo Lancement import des paramétres
 :import_param
     sqlcmd -S %server% -U %user% -P %password% -d %database% -i .\script\Import_param.sql
