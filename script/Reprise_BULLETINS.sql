@@ -3,7 +3,7 @@ GO
 
 --Gestion de la table PAIEENCOURS/HISTOBULLETIN/HISTOCUMSAL
 
---Génération des datetimes de début et de fin zone PPAIE. La colonne est au format AAAAMM la fonction CAST ne peut pas convertir au format datetime
+--GÃ©nÃ©ration des datetimes de dÃ©but et de fin zone PPAIE. La colonne est au format AAAAMM la fonction CAST ne peut pas convertir au format datetime
 
  
 UPDATE ENTETEPAIE SET TRANSCO_PPAIE_TEMPORAIRE=CONCAT(PPAIE,'01');--passage au format AAAAMMJJ
@@ -104,14 +104,14 @@ DEALLOCATE PAIEENCOURS_CURSOR;
 
 GO
 
---Reprise des rubriques dans SPRINT on peut utiliser un code rubrique dans les REM et dans les COT. On Utilise le champ @VAR_PHB_NATURERUB pour faire la différence
+--Reprise des rubriques dans SPRINT on peut utiliser un code rubrique dans les REM et dans les COT. On Utilise le champ @VAR_PHB_NATURERUB pour faire la diffÃ©rence
 
---@VAR_PHB_NATURERUB = AAA = Rémunération
+--@VAR_PHB_NATURERUB = AAA = RÃ©munÃ©ration
 --@VAR_PHB_NATURERUB = COT = Cotisation
 
 --Dans la transco SYNAPPS on indiquera RXXXX pour les rubriques de REM et CXXXX pour les cotisations
 
---Gestion des rubriques de rémunération
+--Gestion des rubriques de rÃ©munÃ©ration
 
 DECLARE
 
@@ -145,7 +145,7 @@ DECLARE
 @VAR_NOM_TABLE char(13);
 
 SET @VAR_NOM_TABLE='HISTOBULLETIN';
-SET @VAR_PHB_LIBELLE='Reprise Rémunération';
+SET @VAR_PHB_LIBELLE='Reprise RÃ©munÃ©ration';
 SET @VAR_PHB_NATURERUB='AAA';
 SET @VAR_PHB_IMPRIMABLE='X';
 
@@ -163,7 +163,7 @@ INTO @VAR_PHB_SIREN,@VAR_PHB_ETABLISSEMENT,@VAR_PHB_SALARIE,@VAR_PHB_DATEDEBUT,@
 
 WHILE @@FETCH_STATUS = 0 
 
-	BEGIN--début de la boucle
+	BEGIN--dÃ©but de la boucle
 		
 	INSERT INTO HR_SPRINT_HISTOBULLETIN
 	VALUES (@VAR_PHB_SIREN,@VAR_PHB_ETABLISSEMENT,@VAR_PHB_SALARIE,@VAR_PHB_DATEDEBUT,@VAR_PHB_DATEFIN,@VAR_PHB_NATURERUB,@VAR_PHB_RUBRIQUE,@VAR_PHB_LIBELLE,@VAR_PHB_IMPRIMABLE,@VAR_PHB_BASEREM,@VAR_PHB_TAUXREM,@VAR_PHB_COEFFREM,--
@@ -228,7 +228,7 @@ INTO @VAR_PHB_SIREN,@VAR_PHB_ETABLISSEMENT,@VAR_PHB_SALARIE,@VAR_PHB_DATEDEBUT,@
 
 WHILE @@FETCH_STATUS = 0 
 
-	BEGIN--début de la boucle
+	BEGIN--dÃ©but de la boucle
 		
 	INSERT INTO HR_SPRINT_HISTOBULLETIN
 	VALUES (@VAR_PHB_SIREN,@VAR_PHB_ETABLISSEMENT,@VAR_PHB_SALARIE,@VAR_PHB_DATEDEBUT,@VAR_PHB_DATEFIN,@VAR_PHB_NATURERUB,@VAR_PHB_RUBRIQUE,@VAR_PHB_LIBELLE,@VAR_PHB_IMPRIMABLE,@VAR_PHB_BASEREM,@VAR_PHB_TAUXREM,@VAR_PHB_COEFFREM,--
@@ -283,9 +283,9 @@ INTO @VAR_PHC_SIREN,@VAR_PHC_ETABLISSEMENT,@VAR_PHC_SALARIE,@VAR_PHC_DATEDEBUT,@
 
 WHILE @@FETCH_STATUS = 0 
 
-	BEGIN--début de la boucle
+	BEGIN--dÃ©but de la boucle
 
-	IF @VAR_PHC_MONTANT_2!=''--Dans SPRINT un champ PHC_MONTANT dans HRU on peut alimenter BASE ou MONTS. Si MONTS <> '' alors on alimente MONTS
+	IF @VAR_PHC_MONTANT_2=''--Dans SPRINT un champ PHC_MONTANT dans HRU on peut alimenter BASE ou MONTS. Si MONTS <> '' alors on alimente MONTS
 	BEGIN
 		SET @VAR_PHC_MONTANT=@VAR_PHC_MONTANT_2;
 	END
@@ -344,9 +344,9 @@ INTO @VAR_PHC_SIREN,@VAR_PHC_ETABLISSEMENT,@VAR_PHC_SALARIE,@VAR_PHC_DATEDEBUT,@
 
 WHILE @@FETCH_STATUS = 0 
 
-	BEGIN--début de la boucle
+	BEGIN--dÃ©but de la boucle
 
-	IF @VAR_PHC_MONTANT_2!=''--Dans SPRINT un champ PHC_MONTANT dans HRU on peut alimenter BASE ou MONTS. Si MONTS <> '' alors on alimente MONTS
+	IF @VAR_PHC_MONTANT_2=''--Dans SPRINT un champ PHC_MONTANT dans HRU on peut alimenter BASE ou MONTS. Si MONTS <> '' alors on alimente MONTS
 	BEGIN
 		SET @VAR_PHC_MONTANT=@VAR_PHC_MONTANT_2;
 	END
@@ -361,7 +361,7 @@ WHILE @@FETCH_STATUS = 0
 CLOSE COMPTEURS_CURSOR;  
 DEALLOCATE COMPTEURS_CURSOR; 
 
---suppression des valeurs à NULL
+--suppression des valeurs Ã  NULL
 
 UPDATE HR_SPRINT_PAIEENCOURS SET PPU_TRAVAILN1='' WHERE PPU_TRAVAILN1 IS NULL;
 UPDATE HR_SPRINT_PAIEENCOURS SET PPU_TRAVAILN2='' WHERE PPU_TRAVAILN2 IS NULL;
