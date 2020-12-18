@@ -13,7 +13,7 @@
     echo erreur de connexion au serveur SQL
     goto connexion
 :etape
-    set /p qexport=Souhaitez aller directement à l'export ? [1/0] :
+    set /p qexport=Souhaitez vous aller directement à l'export ? [1/0] :
     if %qexport%==1 goto debutexport
     set /p razhru=Souhaitez vous faire RAZ des tables HRU ? [1/0] :
     if %razhru%==1 (
@@ -48,6 +48,7 @@
         sqlcmd -S %server% -U %user% -P %password% -d %database% -i .\script\Modifications_tables_HRU.sql
         sqlcmd -S %server% -U %user% -P %password% -d %database% -i .\script\Ajout_Nom_des_tables.sql
     )
+:param
     ::Création des paramétres
     set /p matricule=Souhaitez vous reprendre les matricules à l identique ? [1/0] :
     ::mode de reprise 1
@@ -58,9 +59,9 @@
     set /p matricule=Souhaitez vous reprendre les matricules + CEMP + reodification ? [3/0] :
     ::mode de reprise 3
 :compta
-    set /p longueur_auxiliaire=Longueur des comptes auxiliaires ?
-    set /p prefixe_auxiliaire=Prefixe auxiliaire ?
-    set /p utilisationanalytique=Utilisez vous l'analytique ?[1/0]
+    set /p longueur_auxiliaire=Longueur des comptes auxiliaires ? :
+    set /p prefixe_auxiliaire=Prefixe auxiliaire ? :
+    set /p utilisationanalytique=Utilisez vous l'analytique ?[1/0] :
     if %utilisationanalytique%==0 (
         set axe1="-"
         set axe2="-"
@@ -76,7 +77,7 @@
     set /p axe5=Longueur axe 5 ?
 
 :zonelibre
-    set /p zonelibre=Utilisez vous les zones libres ? [1/0]
+    set /p zonelibre=Utilisez vous les zones libres ? [1/0] :
     if %zonelibre%==0 (
         set codestat="-"
         set travailN1="-"
@@ -99,21 +100,21 @@
     set boite3="GCB3"
     set boite4="GCB4"
 :divers
-    set /p bulletin=Reprenez vous les bulletins ?[1/0]
+    set /p bulletin=Reprenez vous les bulletins ?[1/0] :
     if %bulletin%==1 (
         set bulletin="X"
     )
     if %bulletin%==0 (
         set bulletin="-" 
     )
-    set /p partageemploi=Partagez vous les codes emplois ?[1/0]
+    set /p partageemploi=Partagez vous les codes emplois ?[1/0] :
     if %partageemploi%==1 (
         set partageemploi="X"
     )
     if %partageemploi%==0 (
         set partageemploi="-" 
     )
-    set /p partagezonlibre=Partagez vous les zones libres ?[1/0]
+    set /p partagezonlibre=Partagez vous les zones libres ?[1/0] :
     if %partagezonlibre%==1 (
         set partagezonlibre="X"
     )
@@ -124,13 +125,29 @@
     if %codebulletinpaie%==0 (
         set codebulletinpaie="PBG"
     )
-    set /p cp=Utilisez vous des CP ouvrés ?[1/0]
+    set /p cp=Utilisez vous des CP ouvrés ?[1/0] :
     if %cp%==1 (
-        set cp="2,08"
+        set cp="2.08"
     )
     if %cp%==0 (
-        set cp="2,50"
-    )         
+        set cp="2.50"
+    )
+    echo Vos paramètres
+    echo Reprise bulletin : %matricule%
+    echo Longueur auxiliaire : %longueur_auxiliaire%
+    echo Prefixe auxiliaire : %prefixe_auxiliaire%
+    echo Analyique : %utilisationanalytique%
+    echo Axe 1 : %axe1%
+    echo Axe 2 : %axe2%
+    echo Axe 3 : %axe3%
+    echo Axe 4 : %axe4%
+    echo Axe 5 : %axe5%
+    echo Zone libre : %zonelibre%
+    echo partage emploi : %partageemploi%
+    echo partage zone libre : %partagezonlibre%
+    echo CP : %cp%
+    set /p lancement=Pour modifier vos choix taper 1 sinon 0 [1/0]
+    if %lancement%==1 goto param
     echo Lancement import des paramétres
 :import_param
     sqlcmd -S %server% -U %user% -P %password% -d %database% -i .\script\Import_param.sql
