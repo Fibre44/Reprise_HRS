@@ -49,7 +49,7 @@
         sqlcmd -S %server% -U %user% -P %password% -d %database% -i .\script\Ajout_Nom_des_tables.sql
     )
 :param
-    ::Création des paramétres
+    ::Création des paramètres
     set /p matricule=Souhaitez vous reprendre les matricules à l identique ? [1/0] :
     ::mode de reprise 1
     if %matricule%==1 goto compta
