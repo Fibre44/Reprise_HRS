@@ -52,7 +52,7 @@ INSERT INTO PARAMETRES VALUES
 ('RTT PRIS','','Indiquer le cumul de RTT PRIS'),
 ('Acquis CP',$(cp),'Le Nbre de jours acquis CP'),
 ('Conservation code etb','X','Indiquer X pour conserver le code ETB de SYNAPPS'),
-('TRANSCO_PROFIL','-','Indiquer X pour transcoder les profils'),
+('TRANSCO_PROFIL',$(profils),'Indiquer X pour transcoder les profils'),
 ('CODE_BULLETIN',$(codebulletinpaie),'Indiquer le code bulletin de paie');
 !!:GO  
 GO

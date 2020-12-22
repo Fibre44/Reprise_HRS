@@ -132,6 +132,13 @@
     if %cp%==0 (
         set cp="2.50"
     )
+    set /p profils=Reprenez vous les profils ?[1/0] :
+    if %profils%==1 (
+        set profils="X"
+    )
+    if %profils%==0 (
+        set profils="-"
+    )
     echo Vos paramètres
     echo Reprise bulletin : %matricule%
     echo Longueur auxiliaire : %longueur_auxiliaire%
@@ -146,6 +153,7 @@
     echo partage emploi : %partageemploi%
     echo partage zone libre : %partagezonlibre%
     echo CP : %cp%
+    echo Profils : %profils%
     set /p lancement=Pour modifier vos choix taper 1 sinon 0 [1/0]
     if %lancement%==1 goto param
     echo Lancement import des paramétres
