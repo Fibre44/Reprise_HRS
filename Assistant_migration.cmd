@@ -1,4 +1,5 @@
 @echo off
+echo Assistant de migration version : 1.2.2
 :connexion
     set /p user=Saisir le login SQL :
     set /p password=Saisir le password SQL : 
@@ -44,6 +45,7 @@
         dtexec /f ".\dtsx\CLASSIF4.dtsx" /l "DTS.LogProviderTextFile;.\logs\log_classif4.txt"        
         dtexec /f ".\dtsx\CLASSIF5.dtsx" /l "DTS.LogProviderTextFile;.\logs\log_classif5.txt"     
         dtexec /f ".\dtsx\IMPUTATIONANALYTIQUE.dtsx" /l "DTS.LogProviderTextFile;.\logs\log_analytique.txt"
+        dtexec /f ".\dtsx\PEOPLEDOC.dtsx" /l "DTS.LogProviderTextFile;.\logs\log_analytique.txt"
         dtexec /f ".\dtsx\CCN.dtsx" /l "DTS.LogProviderTextFile;.\logs\log_CCN.txt"   
         sqlcmd -S %server% -U %user% -P %password% -d %database% -i .\script\Modifications_tables_HRU.sql
         sqlcmd -S %server% -U %user% -P %password% -d %database% -i .\script\Ajout_Nom_des_tables.sql
@@ -216,10 +218,12 @@
     copy .\Entete\ABSENCESALARIE_EN_TETE.asc + .\temp\ABSENCESALARIE.asc .\fichiers_hrs\%SIREN%\%SIREN%_ABSENCESALARIE.asc
     copy .\Entete\CHOIXCOD_EN_TETE.asc + .\temp\CHOIXCOD.asc .\fichiers_hrs\%SIREN%\%SIREN%_CHOIXCOD.asc
     copy .\Entete\HISTOCUMSAL_EN_TETE.asc + .\temp\HISTOCUMSAL.asc .\fichiers_hrs\%SIREN%\%SIREN%_HISTOCUMSAL.asc
+    copy .\temp\Analytique.txt .\fichiers_hrs\%SIREN%\%SIREN%_Analyique.txt
     cd .\temp
     echo Ouverture du dossier temp
     del *.asc
-    echo Suppresion des fichiers temporaires
+    cd .\..
+    echo Suppresion des fichiers temporaires    
     echo Fin d'export
     :: ajouter une sortie de boucle
     set /p export=Pour exporter un autre SIREN taper 1 sinon 0 pour quitter :
