@@ -389,8 +389,8 @@ ELSE --si le salarié n'est pas encore migré
 
 			SET @VAR_PSA_DADSPROF=
 			CASE
-				WHEN @VAR_DADSPROF_TEMP='07' THEN '07'--si ouvrier
-				WHEN @VAR_DADSPROF_TEMP='01' THEN '06'--si employé
+				WHEN @VAR_DADSPROF_TEMP='07' THEN '01'--si ouvrier
+				WHEN @VAR_DADSPROF_TEMP='06' THEN '02'--si employé
 				WHEN @VAR_DADSPROF_TEMP='02' THEN '05'--si assimilé cadre
 				WHEN @VAR_DADSPROF_TEMP='05' THEN '04'--agent de maitrise
 				WHEN @VAR_DADSPROF_TEMP='04' THEN '29'--si cadre
@@ -400,12 +400,12 @@ ELSE --si le salarié n'est pas encore migré
 					
 			SET @VAR_PSA_CATDADS =
 			CASE
-				WHEN @VAR_PSA_DADSPROF='02' THEN '005'--si employé
-				WHEN @VAR_PSA_DADSPROF='07' THEN '004'--si ouvrier
-				WHEN @VAR_PSA_DADSPROF='13' THEN '001'--si dirigeant
-				WHEN @VAR_PSA_DADSPROF='29' THEN '002'--si cadre
-				WHEN @VAR_PSA_DADSPROF='25' THEN '002'--si assimilé cadre			
-				WHEN @VAR_PSA_DADSPROF='04' THEN '002'--agent de maitrise			
+				WHEN @VAR_PSA_DADSPROF='02' THEN '05'--si employé
+				WHEN @VAR_PSA_DADSPROF='01' THEN '04'--si ouvrier
+				WHEN @VAR_PSA_DADSPROF='13' THEN '01'--si dirigeant
+				WHEN @VAR_PSA_DADSPROF='29' THEN '02'--si cadre
+				WHEN @VAR_PSA_DADSPROF='25' THEN '02'--si assimilé cadre			
+				WHEN @VAR_PSA_DADSPROF='04' THEN '02'--agent de maitrise			
 	
 			END
 
