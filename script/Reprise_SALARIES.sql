@@ -404,7 +404,7 @@ ELSE --si le salarié n'est pas encore migré
 				WHEN @VAR_PSA_DADSPROF='01' THEN '004'--si ouvrier
 				WHEN @VAR_PSA_DADSPROF='13' THEN '001'--si dirigeant
 				WHEN @VAR_PSA_DADSPROF='29' THEN '002'--si cadre
-				WHEN @VAR_PSA_DADSPROF='25' THEN '002'--si assimilé cadre			
+				WHEN @VAR_PSA_DADSPROF='25' THEN '005'--si assimilé cadre			
 				WHEN @VAR_PSA_DADSPROF='04' THEN '002'--agent de maitrise			
 	
 			END
