@@ -401,6 +401,4 @@ UPDATE HR_SPRINT_HISTOCUMSAL SET PHC_LIBREPCMB4='' WHERE PHC_LIBREPCMB4 IS NULL;
 
 Go
 
---Reprise du cumul base 10ème
-
 PRINT 'Fin de traitement :-)'
