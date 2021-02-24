@@ -170,7 +170,7 @@ SET @VAR_PCN_PERIODEPY='-1';
 SET @VAR_PCN_TYPEIMPUTE='AC2';
 SET @VAR_PCN_TYPECONGE='CPA';
 SET @VAR_PCN_CODETAPE='P';
-SET @VAR_PCN_LIBELLE='Reprise des donn�es des CP Pris sur N';
+SET @VAR_PCN_LIBELLE='Reprise des données des CP Pris sur N';
 SET @VAR_PCN_BASE='';
 SET @VAR_PCN_DATEVALIDITE='31/05/2020';
 SET @VAR_PCN_DATEDEBUT='01/06/2019';
@@ -250,9 +250,6 @@ END
 CLOSE CP_ACQUIS_N1_cursor;  
 DEALLOCATE CP_ACQUIS_N1_cursor; 
 
---Reprise des CP pris sur N1
-
--- à coder 
 --Reprise CP N-2
 
 DECLARE
