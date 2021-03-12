@@ -1,5 +1,5 @@
 @echo off
-echo Assistant de migration version : 1.2.2
+echo Assistant de migration version : 1.3.0
 :connexion
     set /p user=Saisir le login SQL :
     set /p password=Saisir le password SQL : 
@@ -218,6 +218,7 @@ echo Assistant de migration version : 1.2.2
     copy .\Entete\ABSENCESALARIE_EN_TETE.asc + .\temp\ABSENCESALARIE.asc .\fichiers_hrs\%SIREN%\%SIREN%_ABSENCESALARIE.asc
     copy .\Entete\CHOIXCOD_EN_TETE.asc + .\temp\CHOIXCOD.asc .\fichiers_hrs\%SIREN%\%SIREN%_CHOIXCOD.asc
     copy .\Entete\HISTOCUMSAL_EN_TETE.asc + .\temp\HISTOCUMSAL.asc .\fichiers_hrs\%SIREN%\%SIREN%_HISTOCUMSAL.asc
+    copy .\Entete\HISTOBULLETIN_EN_TETE.asc + .\temp\HISTOBULLETIN.asc .\fichiers_hrs\%SIREN%\%SIREN%_HISTOBULLETIN.asc
     copy .\temp\Analytique.txt .\fichiers_hrs\%SIREN%\%SIREN%_Analyique.txt
     cd .\temp
     echo Ouverture du dossier temp
