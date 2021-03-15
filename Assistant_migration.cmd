@@ -1,5 +1,5 @@
 @echo off
-echo Assistant de migration version : 1.3.0
+echo Assistant de migration version : 1.3.1
 :connexion
     set /p user=Saisir le login SQL :
     set /p password=Saisir le password SQL : 
@@ -97,6 +97,10 @@ echo Assistant de migration version : 1.3.0
     set travailN2="CTA03"
     set travailN3="CTA04"
     set travailN4="CTA05"
+    set tablette1="CTA06"
+    set tablette2="CTA07"
+    set tablette3="CTA08"
+    set tablette4="CTA09"
     set boite1="GCB1"
     set boite2="GCB2"
     set boite3="GCB3"
@@ -160,7 +164,7 @@ echo Assistant de migration version : 1.3.0
     if %lancement%==1 goto param
     echo Lancement import des paramétres
 :import_param
-    sqlcmd -S %server% -U %user% -P %password% -d %database% -i .\script\Import_param.sql
+    sqlcmd -S %server% -U %user% -P %password% -d %database% -i .\script\Import_param.sql -o .\logs\logs_param.txt
     echo Import des paramétres
     echo Reprise en cours veuillez patienter le traitement peut etre long 15 à 30 minutes heure de début %time%
     sqlcmd -S %server% -U %user% -P %password% -d %database% -i .\script\Reprise_CCN.sql -o .\logs\logs_ccn.txt
@@ -219,6 +223,7 @@ echo Assistant de migration version : 1.3.0
     copy .\Entete\CHOIXCOD_EN_TETE.asc + .\temp\CHOIXCOD.asc .\fichiers_hrs\%SIREN%\%SIREN%_CHOIXCOD.asc
     copy .\Entete\HISTOCUMSAL_EN_TETE.asc + .\temp\HISTOCUMSAL.asc .\fichiers_hrs\%SIREN%\%SIREN%_HISTOCUMSAL.asc
     copy .\Entete\HISTOBULLETIN_EN_TETE.asc + .\temp\HISTOBULLETIN.asc .\fichiers_hrs\%SIREN%\%SIREN%_HISTOBULLETIN.asc
+    copy .\Entete\PAIEENCOURS_EN_TETE.asc + .\temp\PAIEENCOURS.asc .\fichiers_hrs\%SIREN%\%SIREN%_PAIEENCOURS.asc
     copy .\temp\Analytique.txt .\fichiers_hrs\%SIREN%\%SIREN%_Analyique.txt
     cd .\temp
     echo Ouverture du dossier temp
