@@ -1,27 +1,27 @@
 USE REPRISE_HRU
 
 
---Gestion des nouveaux codes établissements
---attention dans la table Etablissement on trouve plusieurs fois les mêmes valeurs
+--Gestion des nouveaux codes Ã©tablissements
+--attention dans la table Etablissement on trouve plusieurs fois les mï¿½mes valeurs
 
 DECLARE
 
-@VAR_SOCIETE_LIGNE int,--société en cours
-@VAR_SOCIETE_TOTAL int,--total des sociétés
-@VAR_SOCIETE_CEMP char(4),--société à traiter
-@VAR_ETABLISSEMENT_LIGNE int, --établissement en cours
-@VAR_ETABLISSEMENT_TOTAL int, --total des établissement
-@VAR_SOCIETE_ETABLISSEMENT char(4), --va lire les 4 première position de gauche du champ etablissement dans etablissement pour trouver la société
-@VAR_ETABLISSEMENT_CODE_HRU varchar(35),--code établissement HRU
-@VAR_ETABLISSEMENT_CODE_HRS_TEMP int, --Incrémentation des établissements
-@VAR_ETABLISSEMENT_CODE_HRS char(3),--code établissement HRS
+@VAR_SOCIETE_LIGNE int,--sociï¿½tï¿½ en cours
+@VAR_SOCIETE_TOTAL int,--total des sociï¿½tï¿½s
+@VAR_SOCIETE_CEMP char(4),--sociï¿½tï¿½ Ã© traiter
+@VAR_ETABLISSEMENT_LIGNE int, --ï¿½tablissement en cours
+@VAR_ETABLISSEMENT_TOTAL int, --total des ï¿½tablissement
+@VAR_SOCIETE_ETABLISSEMENT char(4), --va lire les 4 premiï¿½re position de gauche du champ etablissement dans etablissement pour trouver la sociï¿½tï¿½
+@VAR_ETABLISSEMENT_CODE_HRU varchar(35),--code ï¿½tablissement HRU
+@VAR_ETABLISSEMENT_CODE_HRS_TEMP int, --Incrï¿½mentation des ï¿½tablissements
+@VAR_ETABLISSEMENT_CODE_HRS char(3),--code ï¿½tablissement HRS
 @VAR_RAISON_SOCIALE varchar(255),
 @VAR_NATURECONTROLE varchar(255),
 @VAR_RESULTATCONTROLE varchar(255),
 @VAR_COMMENTAIRE varchar(255),
 @VAR_TYPE_TRANSCO varchar(35),--alimente la table de transco
-@VAR_TYPE_VALEUR_HRU int,--test si l'établissement existe déjà dans la table de transco
-@VAR_TRA_SIREN varchar(35), --SIREN de la société
+@VAR_TYPE_VALEUR_HRU int,--test si l'ï¿½tablissement existe dï¿½jï¿½ dans la table de transco
+@VAR_TRA_SIREN varchar(35), --SIREN de la sociï¿½tï¿½
 @VAR_PARAMETRE_RDD char(1);
 
 SELECT @VAR_PARAMETRE_RDD=PAR_VALEUR FROM PARAMETRES WHERE PAR_NOM='Conservation code etb';
@@ -36,28 +36,28 @@ SET @VAR_ETABLISSEMENT_LIGNE=1;
 SELECT @VAR_SOCIETE_TOTAL=COUNT(*) FROM EMPLOYEUR;
 SELECT @VAR_ETABLISSEMENT_TOTAL=COUNT(*) FROM ETABLISSEMENT;
 
-WHILE @VAR_SOCIETE_LIGNE<=@VAR_SOCIETE_TOTAL --boucle par société
+WHILE @VAR_SOCIETE_LIGNE<=@VAR_SOCIETE_TOTAL --boucle par sociï¿½tï¿½
 
 BEGIN
 
-SELECT @VAR_SOCIETE_CEMP=Employeur FROM EMPLOYEUR WHERE @VAR_SOCIETE_LIGNE=SOCIETE_LIGNE;--récupération de la société à traiter
-SELECT @VAR_TRA_SIREN=Siren FROM EMPLOYEUR WHERE @VAR_SOCIETE_LIGNE=SOCIETE_LIGNE; --récupération du SIREN
+SELECT @VAR_SOCIETE_CEMP=Employeur FROM EMPLOYEUR WHERE @VAR_SOCIETE_LIGNE=SOCIETE_LIGNE;--rï¿½cupï¿½ration de la sociï¿½tï¿½ Ã© traiter
+SELECT @VAR_TRA_SIREN=Siren FROM EMPLOYEUR WHERE @VAR_SOCIETE_LIGNE=SOCIETE_LIGNE; --rï¿½cupï¿½ration du SIREN
 
 
-	WHILE @VAR_ETABLISSEMENT_LIGNE<=@VAR_ETABLISSEMENT_TOTAL --boucle par établissement
+	WHILE @VAR_ETABLISSEMENT_LIGNE<=@VAR_ETABLISSEMENT_TOTAL --boucle par ï¿½tablissement
 
 	BEGIN
 
-	SELECT @VAR_SOCIETE_ETABLISSEMENT=LEFT(Etablissement,4) FROM ETABLISSEMENT WHERE  ETABLISSEMENT_LIGNE=@VAR_ETABLISSEMENT_LIGNE;--récupération du code société
-	Print 'Societe du code etb'+ RIGHT(@VAR_SOCIETE_ETABLISSEMENT,4)+'société en cours'+@VAR_SOCIETE_CEMP 
+	SELECT @VAR_SOCIETE_ETABLISSEMENT=LEFT(Etablissement,4) FROM ETABLISSEMENT WHERE  ETABLISSEMENT_LIGNE=@VAR_ETABLISSEMENT_LIGNE;--rï¿½cupï¿½ration du code sociï¿½tï¿½
+	Print 'Societe du code etb'+ RIGHT(@VAR_SOCIETE_ETABLISSEMENT,4)+'sociï¿½tï¿½ en cours'+@VAR_SOCIETE_CEMP 
 
-		IF @VAR_SOCIETE_ETABLISSEMENT=@VAR_SOCIETE_CEMP --Si le code société de l'établissement correspond à l'établissement en cours alors traitement
+		IF @VAR_SOCIETE_ETABLISSEMENT=@VAR_SOCIETE_CEMP --Si le code sociï¿½tï¿½ de l'ï¿½tablissement correspond Ã© l'ï¿½tablissement en cours alors traitement
 
 			BEGIN
 			SELECT @VAR_ETABLISSEMENT_CODE_HRU=Etablissement FROM ETABLISSEMENT WHERE ETABLISSEMENT_LIGNE=@VAR_ETABLISSEMENT_LIGNE;
-			SELECT @VAR_TYPE_VALEUR_HRU=COUNT(*) FROM TRANSCO WHERE TRA_VALEURHRU=@VAR_ETABLISSEMENT_CODE_HRU;--recherche si l'établissement a déjà été traité
+			SELECT @VAR_TYPE_VALEUR_HRU=COUNT(*) FROM TRANSCO WHERE TRA_VALEURHRU=@VAR_ETABLISSEMENT_CODE_HRU;--recherche si l'ï¿½tablissement a dï¿½jï¿½ ï¿½tï¿½ traitï¿½
 
-			IF @VAR_TYPE_VALEUR_HRU=0 --Test si l'établissement a déjà été importé
+			IF @VAR_TYPE_VALEUR_HRU=0 --Test si l'ï¿½tablissement a dï¿½jï¿½ ï¿½tï¿½ importï¿½
 
 			BEGIN
 
@@ -65,7 +65,7 @@ SELECT @VAR_TRA_SIREN=Siren FROM EMPLOYEUR WHERE @VAR_SOCIETE_LIGNE=SOCIETE_LIGN
 
 				BEGIN
 
-					SET @VAR_ETABLISSEMENT_CODE_HRS_TEMP=@VAR_ETABLISSEMENT_CODE_HRS_TEMP+1;--Incrémentation du compteur
+					SET @VAR_ETABLISSEMENT_CODE_HRS_TEMP=@VAR_ETABLISSEMENT_CODE_HRS_TEMP+1;--Incrï¿½mentation du compteur
 			
 				
 						IF @VAR_ETABLISSEMENT_CODE_HRS_TEMP<10--Ajout des 0 
@@ -84,8 +84,8 @@ SELECT @VAR_TRA_SIREN=Siren FROM EMPLOYEUR WHERE @VAR_SOCIETE_LIGNE=SOCIETE_LIGN
 
 							END
 		
-					Print 'Société en cours '+@VAR_SOCIETE_CEMP+' l établissement '+@VAR_ETABLISSEMENT_CODE_HRU+' devient '+@VAR_ETABLISSEMENT_CODE_HRS-- Affiche du message
-					SET @VAR_COMMENTAIRE='Société en cours '+@VAR_SOCIETE_CEMP+' l établissement '+@VAR_ETABLISSEMENT_CODE_HRU+' devient '+@VAR_ETABLISSEMENT_CODE_HRS;
+					Print 'Sociï¿½tï¿½ en cours '+@VAR_SOCIETE_CEMP+' l ï¿½tablissement '+@VAR_ETABLISSEMENT_CODE_HRU+' devient '+@VAR_ETABLISSEMENT_CODE_HRS-- Affiche du message
+					SET @VAR_COMMENTAIRE='Sociï¿½tï¿½ en cours '+@VAR_SOCIETE_CEMP+' l ï¿½tablissement '+@VAR_ETABLISSEMENT_CODE_HRU+' devient '+@VAR_ETABLISSEMENT_CODE_HRS;
 				
 					INSERT INTO TRANSCO
 					VALUES (@VAR_TYPE_TRANSCO,@VAR_ETABLISSEMENT_CODE_HRU,@VAR_ETABLISSEMENT_CODE_HRS,@VAR_TRA_SIREN);
@@ -93,7 +93,7 @@ SELECT @VAR_TRA_SIREN=Siren FROM EMPLOYEUR WHERE @VAR_SOCIETE_LIGNE=SOCIETE_LIGN
 					END
 				
 
-				ELSE --Si on conserve le code
+				ELSE --Si non conserve le code
 					BEGIN
 					SET @VAR_ETABLISSEMENT_CODE_HRS=RIGHT (@VAR_ETABLISSEMENT_CODE_HRU,3);
 
@@ -104,21 +104,21 @@ SELECT @VAR_TRA_SIREN=Siren FROM EMPLOYEUR WHERE @VAR_SOCIETE_LIGNE=SOCIETE_LIGN
 					END
 			END
 			
-			ELSE --L'établissement existe déjà
+			ELSE --L'ï¿½tablissement existe dï¿½jï¿½
 
 				BEGIN
 
-				Print 'L établissement a déjà été traité'
-				SET @VAR_COMMENTAIRE='L établissement a déjà été traité';
+				Print 'L ï¿½tablissement a dï¿½jï¿½ ï¿½tï¿½ traitï¿½'
+				SET @VAR_COMMENTAIRE='L ï¿½tablissement a dï¿½jï¿½ ï¿½tï¿½ traitï¿½';
 
 				END
 			END
 
-			ELSE--l'établissement ne fait pas partie de la société en cours
+			ELSE--l'ï¿½tablissement ne fait pas partie de la sociï¿½tï¿½ en cours
 
 			BEGIN
 
-			Print 'L établissement ne fait pas partie de la société'
+			Print 'L ï¿½tablissement ne fait pas partie de la sociï¿½tï¿½'
 			END
 
 
@@ -153,9 +153,9 @@ DECLARE
 @VAR_ET_SIRET char(14),
 @VAR_NIC_ETABLISSEMENT varchar(5),
 @VAR_ET_APE char(5),
-@VAR_CODE_ETAB_HR_SPRINT char(3), --code établissement HR Sprint
-@VAR_CODE_ETAB_HRU char(13),-- code établissement HRU
-@VAR_NBRE_ETABLISSEMENT int,--nbre total d'établissement
+@VAR_CODE_ETAB_HR_SPRINT char(3), --code ï¿½tablissement HR Sprint
+@VAR_CODE_ETAB_HRU char(13),-- code ï¿½tablissement HRU
+@VAR_NBRE_ETABLISSEMENT int,--nbre total d'ï¿½tablissement
 @VAR_ETABLISSEMENT_EN_COURS int; --ligne en cours
 
 SELECT @VAR_ETABLISSEMENT_EN_COURS=MIN(TRA_ID) FROM TRANSCO WHERE TRA_TYPE='Etablissement';
@@ -170,26 +170,26 @@ WHILE @VAR_ETABLISSEMENT_EN_COURS<=@VAR_NBRE_ETABLISSEMENT
 
 BEGIN
 
-SELECT @VAR_CODE_ETAB_HR_SPRINT=TRA_VALEURHRS FROM TRANSCO WHERE TRA_ID=@VAR_ETABLISSEMENT_EN_COURS; --récupération du code établissement HRS
+SELECT @VAR_CODE_ETAB_HR_SPRINT=TRA_VALEURHRS FROM TRANSCO WHERE TRA_ID=@VAR_ETABLISSEMENT_EN_COURS; --rï¿½cupï¿½ration du code ï¿½tablissement HRS
 SET @VAR_ET_ETABLISSEMENT=@VAR_CODE_ETAB_HR_SPRINT;
-SELECT @VAR_CODE_ETAB_HRU=TRA_VALEURHRU FROM TRANSCO WHERE TRA_ID=@VAR_ETABLISSEMENT_EN_COURS;--récupération du code établissement HRU
-SELECT @VAR_ET_SIREN=TRA_SIREN FROM TRANSCO WHERE TRA_ID=@VAR_ETABLISSEMENT_EN_COURS; --récupération du SIREN de l'établissement
+SELECT @VAR_CODE_ETAB_HRU=TRA_VALEURHRU FROM TRANSCO WHERE TRA_ID=@VAR_ETABLISSEMENT_EN_COURS;--rï¿½cupï¿½ration du code ï¿½tablissement HRU
+SELECT @VAR_ET_SIREN=TRA_SIREN FROM TRANSCO WHERE TRA_ID=@VAR_ETABLISSEMENT_EN_COURS; --rï¿½cupï¿½ration du SIREN de l'ï¿½tablissement
 
 SELECT TOP(1) @VAR_ET_LIBELLE=[Raison Sociale] FROM ETABLISSEMENT WHERE Etablissement=@VAR_CODE_ETAB_HRU;
 SELECT TOP(1) @VAR_ET_ABREGE=[Raison Sociale] FROM ETABLISSEMENT WHERE Etablissement=@VAR_CODE_ETAB_HRU;
-SELECT TOP(1) @VAR_NIC_ETABLISSEMENT=[Nic] FROM ETABLISSEMENT WHERE Etablissement=@VAR_CODE_ETAB_HRU;--récupération du NIC etablissement
+SELECT TOP(1) @VAR_NIC_ETABLISSEMENT=[Nic] FROM ETABLISSEMENT WHERE Etablissement=@VAR_CODE_ETAB_HRU;--rï¿½cupï¿½ration du NIC etablissement
 SET @VAR_ET_SIRET=CONCAT(@VAR_ET_SIREN,@VAR_NIC_ETABLISSEMENT);
 Print @VAR_ET_SIRET
-SELECT TOP(1) @VAR_ET_APE=[Code APET] FROM ETABLISSEMENT WHERE Etablissement=@VAR_CODE_ETAB_HRU;--récupération du NIC etablissement
-SELECT TOP(1) @VAR_ET_ADRESSE1=Voie FROM ETABLISSEMENT WHERE Etablissement=@VAR_CODE_ETAB_HRU;--récupération du NIC etablissement
-SELECT TOP(1) @VAR_ET_CODEPOSTAL=[Code postal] FROM ETABLISSEMENT WHERE Etablissement=@VAR_CODE_ETAB_HRU;--récupération du NIC etablissement
-SELECT TOP(1) @VAR_ET_VILLE=[Localité] FROM ETABLISSEMENT WHERE Etablissement=@VAR_CODE_ETAB_HRU;--récupération du NIC etablissement
+SELECT TOP(1) @VAR_ET_APE=[Code APET] FROM ETABLISSEMENT WHERE Etablissement=@VAR_CODE_ETAB_HRU;--rï¿½cupï¿½ration du NIC etablissement
+SELECT TOP(1) @VAR_ET_ADRESSE1=Voie FROM ETABLISSEMENT WHERE Etablissement=@VAR_CODE_ETAB_HRU;--rï¿½cupï¿½ration du NIC etablissement
+SELECT TOP(1) @VAR_ET_CODEPOSTAL=[Code postal] FROM ETABLISSEMENT WHERE Etablissement=@VAR_CODE_ETAB_HRU;--rï¿½cupï¿½ration du NIC etablissement
+SELECT TOP(1) @VAR_ET_VILLE=[Localitï¿½] FROM ETABLISSEMENT WHERE Etablissement=@VAR_CODE_ETAB_HRU;--rï¿½cupï¿½ration du NIC etablissement
 
 INSERT INTO HR_SPRINT_ETABLISS
 VALUES (@VAR_ET_SIREN,@VAR_ET_ETABLISSEMENT,@VAR_ET_LIBELLE,@VAR_ET_ABREGE,@VAR_ET_ADRESSE1,@VAR_ET_CODEPOSTAL,@VAR_ET_VILLE,@VAR_ET_DIVTERRIT,@VAR_ET_PAYS,
 @VAR_ET_LANGUE,@VAR_ET_SOCIETE,@VAR_ET_JURIDIQUE,@VAR_ET_SIRET,@VAR_ET_APE);
 
-PRINT 'Création de l établissement '+@VAR_ET_LIBELLE
+PRINT 'Crï¿½ation de l ï¿½tablissement '+@VAR_ET_LIBELLE
 
 SET @VAR_ETABLISSEMENT_EN_COURS=@VAR_ETABLISSEMENT_EN_COURS+1;
 

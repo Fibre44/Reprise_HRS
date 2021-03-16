@@ -1,7 +1,7 @@
 USE REPRISE_HRU
 GO
 
---Génération de la table CHOIXCOD et MINIMUMCONVENT à partir de TRANSCO
+--Gï¿½nï¿½ration de la table CHOIXCOD et MINIMUMCONVENT ï¿½ partir de TRANSCO
 
 DECLARE
 
@@ -38,7 +38,7 @@ SET @VAR_PMI_CONVENTION='000';
 SET @VAR_PMI_PREDEFINI='STD';
 SET @VAR_PMI_NODOSSIER='000000';
 SET @VAR_RESULTATCONTROLE='Ok'
-SET @VAR_NATURECONTROLE='Création table CHOIXCOD';
+SET @VAR_NATURECONTROLE='Crï¿½ation table CHOIXCOD';
 SELECT @VAR_LIGNE_TRANSCO=MIN(TRA_ID) FROM TRANSCO;
 SELECT @VAR_TOTAL_LIGNE_TRANSCO=MAX(TRA_ID) FROM TRANSCO;
 
@@ -46,21 +46,21 @@ WHILE @VAR_LIGNE_TRANSCO<=@VAR_TOTAL_LIGNE_TRANSCO
 
 BEGIN
 
-SELECT @VAR_TRA_TYPE=TRA_TYPE FROM TRANSCO WHERE TRA_ID=@VAR_LIGNE_TRANSCO;--récupération du type de reprise
-SELECT @VAR_CC_SIREN=TRA_SIREN FROM TRANSCO WHERE TRA_ID=@VAR_LIGNE_TRANSCO;--récupération du code SIREN de la société
+SELECT @VAR_TRA_TYPE=TRA_TYPE FROM TRANSCO WHERE TRA_ID=@VAR_LIGNE_TRANSCO;--rï¿½cupï¿½ration du type de reprise
+SELECT @VAR_CC_SIREN=TRA_SIREN FROM TRANSCO WHERE TRA_ID=@VAR_LIGNE_TRANSCO;--rï¿½cupï¿½ration du code SIREN de la sociï¿½tï¿½
 SET @VAR_PMI_SIREN=@VAR_CC_SIREN;
-SELECT @VAR_CC_CODE=TRA_VALEURHRS FROM TRANSCO WHERE TRA_ID=@VAR_LIGNE_TRANSCO;--récupération du nouveau code
-SELECT @VAR_CC_LIBELLE=TRA_VALEURHRU FROM TRANSCO WHERE TRA_ID=@VAR_LIGNE_TRANSCO;--récupération du libellé ancienne valeur HRU
-SELECT @VAR_CC_ABREGE=TRA_VALEURHRU FROM TRANSCO WHERE TRA_ID=@VAR_LIGNE_TRANSCO;--récupération du libellé ancienne valeur HRU
+SELECT @VAR_CC_CODE=TRA_VALEURHRS FROM TRANSCO WHERE TRA_ID=@VAR_LIGNE_TRANSCO;--rï¿½cupï¿½ration du nouveau code
+SELECT @VAR_CC_LIBELLE=TRA_VALEURHRU FROM TRANSCO WHERE TRA_ID=@VAR_LIGNE_TRANSCO;--rï¿½cupï¿½ration du libellï¿½ ancienne valeur HRU
+SELECT @VAR_CC_ABREGE=TRA_VALEURHRU FROM TRANSCO WHERE TRA_ID=@VAR_LIGNE_TRANSCO;--rï¿½cupï¿½ration du libellï¿½ ancienne valeur HRU
 IF @VAR_TRA_TYPE='Emploi'
 
 	BEGIN
 
 	SET @VAR_CC_TYPE='PLE';
 
-	PRINT 'Création de la valeur '+@VAR_CC_CODE+' pour le SIREN '+@VAR_CC_SIREN+' ligne en cous '+CAST(@VAR_LIGNE_TRANSCO AS varchar(255))+'/'+CAST(@VAR_TOTAL_LIGNE_TRANSCO AS Varchar(255))
+	PRINT 'Crï¿½ation de la valeur '+@VAR_CC_CODE+' pour le SIREN '+@VAR_CC_SIREN+' ligne en cous '+CAST(@VAR_LIGNE_TRANSCO AS varchar(255))+'/'+CAST(@VAR_TOTAL_LIGNE_TRANSCO AS Varchar(255))
 
-	SET @VAR_COMMENTAIRE='Création de la valeur '+@VAR_CC_CODE+' pour le SIREN '+@VAR_CC_SIREN+' ligne en cous '+CAST(@VAR_LIGNE_TRANSCO AS varchar(255))+'/'+CAST(@VAR_TOTAL_LIGNE_TRANSCO AS Varchar(255));
+	SET @VAR_COMMENTAIRE='Crï¿½ation de la valeur '+@VAR_CC_CODE+' pour le SIREN '+@VAR_CC_SIREN+' ligne en cous '+CAST(@VAR_LIGNE_TRANSCO AS varchar(255))+'/'+CAST(@VAR_TOTAL_LIGNE_TRANSCO AS Varchar(255));
 
 	INSERT INTO HR_SPRINT_CHOIXCOD
 	VALUES (@VAR_CC_SIREN,@VAR_CC_TYPE,@VAR_CC_CODE,@VAR_CC_LIBELLE,@VAR_CC_ABREGE,@VAR_NOM_TABLE);
@@ -102,9 +102,9 @@ IF @VAR_TRA_TYPE='CTA01'--dans la table PARAMETRES il faut regarder la zone HR S
 
 	END;
 
-	PRINT 'Création de la valeur '+@VAR_CC_CODE+' pour le SIREN '+@VAR_CC_SIREN+' ligne en cous '+CAST(@VAR_LIGNE_TRANSCO AS varchar(255))+'/'+CAST(@VAR_TOTAL_LIGNE_TRANSCO AS Varchar(255))
+	PRINT 'Crï¿½ation de la valeur '+@VAR_CC_CODE+' pour le SIREN '+@VAR_CC_SIREN+' ligne en cous '+CAST(@VAR_LIGNE_TRANSCO AS varchar(255))+'/'+CAST(@VAR_TOTAL_LIGNE_TRANSCO AS Varchar(255))
 
-	SET @VAR_COMMENTAIRE='Création de la valeur '+@VAR_CC_CODE+' pour le SIREN '+@VAR_CC_SIREN+' ligne en cous '+CAST(@VAR_LIGNE_TRANSCO AS varchar(255))+'/'+CAST(@VAR_TOTAL_LIGNE_TRANSCO AS Varchar(255));
+	SET @VAR_COMMENTAIRE='Crï¿½ation de la valeur '+@VAR_CC_CODE+' pour le SIREN '+@VAR_CC_SIREN+' ligne en cous '+CAST(@VAR_LIGNE_TRANSCO AS varchar(255))+'/'+CAST(@VAR_TOTAL_LIGNE_TRANSCO AS Varchar(255));
 
 	INSERT INTO HR_SPRINT_CHOIXCOD
 	VALUES (@VAR_CC_SIREN,@VAR_CC_TYPE,@VAR_CC_CODE,@VAR_CC_LIBELLE,@VAR_CC_ABREGE,@VAR_NOM_TABLE);
@@ -137,7 +137,7 @@ IF @VAR_TRA_TYPE='CTA02'
 	
 	--TravailN3
 
-	WHEN EXISTS (SELECT * FROM PARAMETRES WHERE PAR_NOM='TABLETRAVAIL31' AND PAR_VALEUR='CTA01')
+	WHEN EXISTS (SELECT * FROM PARAMETRES WHERE PAR_NOM='TABLETRAVAILN3' AND PAR_VALEUR='CTA01')
 		THEN 'PUN'
 
 	--TravailN4
@@ -147,9 +147,9 @@ IF @VAR_TRA_TYPE='CTA02'
 
 	END;
 
-	PRINT 'Création de la valeur '+@VAR_CC_CODE+' pour le SIREN '+@VAR_CC_SIREN+' ligne en cous '+CAST(@VAR_LIGNE_TRANSCO AS varchar(255))+'/'+CAST(@VAR_TOTAL_LIGNE_TRANSCO AS Varchar(255))
+	PRINT 'Crï¿½ation de la valeur '+@VAR_CC_CODE+' pour le SIREN '+@VAR_CC_SIREN+' ligne en cous '+CAST(@VAR_LIGNE_TRANSCO AS varchar(255))+'/'+CAST(@VAR_TOTAL_LIGNE_TRANSCO AS Varchar(255))
 
-	SET @VAR_COMMENTAIRE='Création de la valeur '+@VAR_CC_CODE+' pour le SIREN '+@VAR_CC_SIREN+' ligne en cous '+CAST(@VAR_LIGNE_TRANSCO AS varchar(255))+'/'+CAST(@VAR_TOTAL_LIGNE_TRANSCO AS Varchar(255));
+	SET @VAR_COMMENTAIRE='Crï¿½ation de la valeur '+@VAR_CC_CODE+' pour le SIREN '+@VAR_CC_SIREN+' ligne en cous '+CAST(@VAR_LIGNE_TRANSCO AS varchar(255))+'/'+CAST(@VAR_TOTAL_LIGNE_TRANSCO AS Varchar(255));
 
 	INSERT INTO HR_SPRINT_CHOIXCOD
 	VALUES (@VAR_CC_SIREN,@VAR_CC_TYPE,@VAR_CC_CODE,@VAR_CC_LIBELLE,@VAR_CC_ABREGE,@VAR_NOM_TABLE);
@@ -192,9 +192,9 @@ IF @VAR_TRA_TYPE='CTA03'
 
 	END;
 
-	PRINT 'Création de la valeur '+@VAR_CC_CODE+' pour le SIREN '+@VAR_CC_SIREN+' ligne en cous '+CAST(@VAR_LIGNE_TRANSCO AS varchar(255))+'/'+CAST(@VAR_TOTAL_LIGNE_TRANSCO AS Varchar(255))
+	PRINT 'Crï¿½ation de la valeur '+@VAR_CC_CODE+' pour le SIREN '+@VAR_CC_SIREN+' ligne en cous '+CAST(@VAR_LIGNE_TRANSCO AS varchar(255))+'/'+CAST(@VAR_TOTAL_LIGNE_TRANSCO AS Varchar(255))
 
-	SET @VAR_COMMENTAIRE='Création de la valeur '+@VAR_CC_CODE+' pour le SIREN '+@VAR_CC_SIREN+' ligne en cous '+CAST(@VAR_LIGNE_TRANSCO AS varchar(255))+'/'+CAST(@VAR_TOTAL_LIGNE_TRANSCO AS Varchar(255));
+	SET @VAR_COMMENTAIRE='Crï¿½ation de la valeur '+@VAR_CC_CODE+' pour le SIREN '+@VAR_CC_SIREN+' ligne en cous '+CAST(@VAR_LIGNE_TRANSCO AS varchar(255))+'/'+CAST(@VAR_TOTAL_LIGNE_TRANSCO AS Varchar(255));
 
 	INSERT INTO HR_SPRINT_CHOIXCOD
 	VALUES (@VAR_CC_SIREN,@VAR_CC_TYPE,@VAR_CC_CODE,@VAR_CC_LIBELLE,@VAR_CC_ABREGE,@VAR_NOM_TABLE);
@@ -236,9 +236,9 @@ IF @VAR_TRA_TYPE='CTA04'
 		THEN 'PSV'
 	END;
 
-	PRINT 'Création de la valeur '+@VAR_CC_CODE+' pour le SIREN '+@VAR_CC_SIREN+' ligne en cous '+CAST(@VAR_LIGNE_TRANSCO AS varchar(255))+'/'+CAST(@VAR_TOTAL_LIGNE_TRANSCO AS Varchar(255))
+	PRINT 'Crï¿½ation de la valeur '+@VAR_CC_CODE+' pour le SIREN '+@VAR_CC_SIREN+' ligne en cous '+CAST(@VAR_LIGNE_TRANSCO AS varchar(255))+'/'+CAST(@VAR_TOTAL_LIGNE_TRANSCO AS Varchar(255))
 
-	SET @VAR_COMMENTAIRE='Création de la valeur '+@VAR_CC_CODE+' pour le SIREN '+@VAR_CC_SIREN+' ligne en cous '+CAST(@VAR_LIGNE_TRANSCO AS varchar(255))+'/'+CAST(@VAR_TOTAL_LIGNE_TRANSCO AS Varchar(255));
+	SET @VAR_COMMENTAIRE='Crï¿½ation de la valeur '+@VAR_CC_CODE+' pour le SIREN '+@VAR_CC_SIREN+' ligne en cous '+CAST(@VAR_LIGNE_TRANSCO AS varchar(255))+'/'+CAST(@VAR_TOTAL_LIGNE_TRANSCO AS Varchar(255));
 
 	INSERT INTO HR_SPRINT_CHOIXCOD
 	VALUES (@VAR_CC_SIREN,@VAR_CC_TYPE,@VAR_CC_CODE,@VAR_CC_LIBELLE,@VAR_CC_ABREGE,@VAR_NOM_TABLE);
@@ -280,9 +280,9 @@ IF @VAR_TRA_TYPE='CTA05'
 
 	END;
 
-	PRINT 'Création de la valeur '+@VAR_CC_CODE+' pour le SIREN '+@VAR_CC_SIREN+' ligne en cous '+CAST(@VAR_LIGNE_TRANSCO AS varchar(255))+'/'+CAST(@VAR_TOTAL_LIGNE_TRANSCO AS Varchar(255))
+	PRINT 'Crï¿½ation de la valeur '+@VAR_CC_CODE+' pour le SIREN '+@VAR_CC_SIREN+' ligne en cous '+CAST(@VAR_LIGNE_TRANSCO AS varchar(255))+'/'+CAST(@VAR_TOTAL_LIGNE_TRANSCO AS Varchar(255))
 
-	SET @VAR_COMMENTAIRE='Création de la valeur '+@VAR_CC_CODE+' pour le SIREN '+@VAR_CC_SIREN+' ligne en cous '+CAST(@VAR_LIGNE_TRANSCO AS varchar(255))+'/'+CAST(@VAR_TOTAL_LIGNE_TRANSCO AS Varchar(255));
+	SET @VAR_COMMENTAIRE='Crï¿½ation de la valeur '+@VAR_CC_CODE+' pour le SIREN '+@VAR_CC_SIREN+' ligne en cous '+CAST(@VAR_LIGNE_TRANSCO AS varchar(255))+'/'+CAST(@VAR_TOTAL_LIGNE_TRANSCO AS Varchar(255));
 
 	INSERT INTO HR_SPRINT_CHOIXCOD
 	VALUES (@VAR_CC_SIREN,@VAR_CC_TYPE,@VAR_CC_CODE,@VAR_CC_LIBELLE,@VAR_CC_ABREGE,@VAR_NOM_TABLE);
@@ -323,9 +323,9 @@ IF @VAR_TRA_TYPE='Coefficient' OR @VAR_TRA_TYPE='Qualification' OR @VAR_TRA_TYPE
 	INSERT INTO HR_SPRINT_MINIMUMCONVENT
 	VALUES (@VAR_PMI_SIREN,@VAR_PMI_NATURE,@VAR_PMI_CONVENTION,@VAR_PMI_TYPENATURE,@VAR_PMI_CODE,@VAR_PMI_LIBELLE,@VAR_PMI_PREDEFINI,@VAR_PMI_NODOSSIER,@VAR_NOM_TABLE_MINI);
 
-	PRINT 'Le type de transco est différent de emploi passage à la ligne suivante ligne en cours '+CAST(@VAR_LIGNE_TRANSCO AS varchar(255))+'/'+CAST(@VAR_TOTAL_LIGNE_TRANSCO AS Varchar(255))
+	PRINT 'Le type de transco est diffï¿½rent de emploi passage ï¿½ la ligne suivante ligne en cours '+CAST(@VAR_LIGNE_TRANSCO AS varchar(255))+'/'+CAST(@VAR_TOTAL_LIGNE_TRANSCO AS Varchar(255))
 
-	SET @VAR_COMMENTAIRE='Le type de transco est différent de emploi passage à la ligne suivante ligne en cours '+CAST(@VAR_LIGNE_TRANSCO AS varchar(255))+'/'+CAST(@VAR_TOTAL_LIGNE_TRANSCO AS Varchar(255));
+	SET @VAR_COMMENTAIRE='Le type de transco est diffï¿½rent de emploi passage ï¿½ la ligne suivante ligne en cours '+CAST(@VAR_LIGNE_TRANSCO AS varchar(255))+'/'+CAST(@VAR_TOTAL_LIGNE_TRANSCO AS Varchar(255));
 
 	END
 
@@ -333,9 +333,9 @@ ELSE--il s'agit d'une autre transco
 
 BEGIN
 
-PRINT 'Le type de transco est différent de emploi passage à la ligne suivante ligne en cours '+CAST(@VAR_LIGNE_TRANSCO AS varchar(255))+'/'+CAST(@VAR_TOTAL_LIGNE_TRANSCO AS Varchar(255))
+PRINT 'Le type de transco est diffï¿½rent de emploi passage ï¿½ la ligne suivante ligne en cours '+CAST(@VAR_LIGNE_TRANSCO AS varchar(255))+'/'+CAST(@VAR_TOTAL_LIGNE_TRANSCO AS Varchar(255))
 
-SET @VAR_COMMENTAIRE='Le type de transco est différent de emploi passage à la ligne suivante ligne en cours '+CAST(@VAR_LIGNE_TRANSCO AS varchar(255))+'/'+CAST(@VAR_TOTAL_LIGNE_TRANSCO AS Varchar(255));
+SET @VAR_COMMENTAIRE='Le type de transco est diffï¿½rent de emploi passage ï¿½ la ligne suivante ligne en cours '+CAST(@VAR_LIGNE_TRANSCO AS varchar(255))+'/'+CAST(@VAR_TOTAL_LIGNE_TRANSCO AS Varchar(255));
 
 END
 
