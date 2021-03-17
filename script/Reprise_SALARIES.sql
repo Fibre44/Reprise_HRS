@@ -357,12 +357,12 @@ ELSE --si le salarié n'est pas encore migré
 			
 			--Gestion de l'horaire hebdo
 
-			IF @VAR_PSA_HORAIREMOIS=151.67--si le salarié est é temps plein
+			IF @VAR_PSA_HORAIREMOIS=151.67--si le salarié est à temps plein
 
 			BEGIN
 				SET @VAR_PSA_HORHEBDO=35;
 			END
-			ELSE --si le salarié est é temps partiel
+			ELSE --si le salarié est à temps partiel
 			BEGIN
 
 			SET @VAR_PSA_HORHEBDO=@VAR_PSA_HORAIREMOIS*12/52;
@@ -413,9 +413,9 @@ ELSE --si le salarié n'est pas encore migré
 	
 			END
 
-			IF @VAR_PSA_HORAIREMOIS=0--gestion des salariés aux forfaits jours
+			IF @VAR_PSA_HORANNUEL IS NOT NULL--gestion des salariés aux forfaits jours
 			BEGIN
-				SET @VAR_PSA_UNITETRAVAIL='03'
+				SET @VAR_PSA_UNITETRAVAIL='03';
 			END
 
 			ELSE--cas des salariés en heures
@@ -525,7 +525,7 @@ ELSE --si le salarié n'est pas encore migré
 
 				--récupération de la valeur CTA06
 
-				SELECT @VAR_CTA05_VALEUR_HRU=CTA06 FROM VALIDCONTRAT WHERE MATRI=@VAR_CMATR AND CEMP=@VAR_CEMP_SALARIE ORDER BY DVCTR DESC;
+				SELECT @VAR_CTA06_VALEUR_HRU=CTA06 FROM VALIDCONTRAT WHERE MATRI=@VAR_CMATR AND CEMP=@VAR_CEMP_SALARIE ORDER BY DVCTR DESC;
 				SELECT @VAR_CTA06_VALEUR_HRS=TRA_VALEURHRS FROM TRANSCO WHERE TRA_TYPE='CTA06' AND TRA_SIREN=@VAR_PSA_SIREN AND TRA_VALEURHRU=@VAR_CTA06_VALEUR_HRU;
 			END
 			

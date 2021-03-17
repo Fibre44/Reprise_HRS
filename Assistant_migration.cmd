@@ -1,5 +1,5 @@
 @echo off
-echo Assistant de migration version : 1.3.2
+echo Assistant de migration version : 1.3.3
 :connexion
     set /p user=Saisir le login SQL :
     set /p password=Saisir le password SQL : 
