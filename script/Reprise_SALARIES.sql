@@ -413,14 +413,14 @@ ELSE --si le salarié n'est pas encore migré
 	
 			END
 
-			IF @VAR_PSA_HORANNUEL IS NOT NULL--gestion des salariés aux forfaits jours
+			IF @VAR_PSA_HORANNUEL !=''--gestion des salariés aux forfaits jours
 			BEGIN
-				SET @VAR_PSA_UNITETRAVAIL='03';
+				SET @VAR_PSA_UNITETRAVAIL='03';--forfait jours
 			END
 
 			ELSE--cas des salariés en heures
 			BEGIN
-				SET @VAR_PSA_UNITETRAVAIL='01';
+				SET @VAR_PSA_UNITETRAVAIL='01';--heures
 			END
 
 			SELECT @VAR_PSA_ETATBULLETIN=PAR_VALEUR FROM PARAMETRES WHERE PAR_NOM='CODE_BULLETIN';--code de la trame bulletin de paie
