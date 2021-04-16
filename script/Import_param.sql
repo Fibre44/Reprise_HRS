@@ -14,7 +14,15 @@ CREATE TABLE PARAMETRES
 GO
 
 INSERT INTO PARAMETRES VALUES
+('AUXI_LONGUEUR',$(longueur_auxiliaire),'La valeur est utilisée pour générer les comptes auxiliaires sur la bonne longueur'),
+('RENUMEROTATION_MATRICULE',$(matricule),'Indiquer'),
+('AXE_1',$(axe1),'Indiquer la longueur de l axe 1'),
+('AXE_2',$(axe2),'Indiquer la longueur de l axe 2'),
+('AXE_3',$(axe3),'Indiquer la longueur de l axe 3'),
+('AXE_4',$(axe4),'Indiquer la longueur de l axe 4'),
+('AXE_5',$(axe5),'Indiquer la longueur de l axe 5');
 
+INSERT INTO PARAMETRES VALUES
 ('AUXI_PREFIXE','S','Prefixe auxiliaire'),
 ('GEN_421','421000','La valeur est utilisée pour alimenter la table TIERS. Indiquer le compte de Net à payer'),
 ('TABLETRAVAILN1',$(travailN1),'Indiquer le nom de la colonne HRU'),
@@ -45,20 +53,6 @@ INSERT INTO PARAMETRES VALUES
 ('TRANSCO_PROFIL',$(profils),'Indiquer X pour transcoder les profils'),
 ('CODE_BULLETIN',$(codebulletinpaie),'Indiquer le code bulletin de paie');
 
+PRINT 'Import des paramètres'
 !!:GO  
 GO
-
---Bug le script force une conversion en INT sur le premier INSERT
-INSERT INTO PARAMETRES VALUES
- 
-('AUXI_LONGUEUR',$(longueur_auxiliaire),'La valeur est utilisée pour générer les comptes auxiliaires sur la bonne longueur'),
-('RENUMEROTATION_MATRICULE',$(matricule),'Indiquer'),
-('AXE_1',$(axe1),'Indiquer la longueur de l axe 1'),
-('AXE_2',$(axe2),'Indiquer la longueur de l axe 2'),
-('AXE_3',$(axe3),'Indiquer la longueur de l axe 3'),
-('AXE_4',$(axe4),'Indiquer la longueur de l axe 4'),
-('AXE_5',$(axe5),'Indiquer la longueur de l axe 5');
-
-!!:GO  
-GO
-

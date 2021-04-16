@@ -1,5 +1,5 @@
 @echo off
-echo Assistant de migration version : 1.3.3
+echo Assistant de migration version : 1.3.4
 :connexion
     set /p user=Saisir le login SQL :
     set /p password=Saisir le password SQL : 
@@ -90,6 +90,10 @@ echo Assistant de migration version : 1.3.3
         set boite2="-"
         set boite3="-"
         set boite4="-"
+        set tablette1="-"
+        set tablette2="-"
+        set tablette3="-"
+        set tablette4="-"
         goto divers
     )
     set codestat="CTA01"
@@ -105,6 +109,7 @@ echo Assistant de migration version : 1.3.3
     set boite2="GCB2"
     set boite3="GCB3"
     set boite4="GCB4"
+
 :divers
     set /p bulletin=Reprenez vous les bulletins ?[1/0] :
     if %bulletin%==1 (
